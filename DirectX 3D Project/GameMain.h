@@ -6,6 +6,8 @@ namespace NS_ROOT
 	{
 		class GameMain
 		{
+		private:
+			Scene* _scene;
 		public:
 			GameMain();
 			virtual ~GameMain();
@@ -14,6 +16,8 @@ namespace NS_ROOT
 			void Release();
 			void Update();
 			void Render();
+
+			LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 		};
 	}//end NS_BASE
 }//end NS_ROOT

@@ -24,25 +24,26 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
-//System 폴더 (DirectSDK 설치폴더/Include) 등록 방법
-//솔루션탐색기에서 프로젝트 우클릭
-//속성
-//구성속성의 VC++ 디렉터리 항목선택
-//창의 우측을봐라.
-//포함디렉토리칸의 오른속문자열라인을 선택하면 나오는 아래화살표 클릭
-//<편집..> 문자를클릭
-//포함디렉토리 창이 열리면서 우측 상단의 폴더추가 아이콘클릭
-//클릭해서 나오는 빈간 오른쪽 ... 버튼 눌러
-//탐색기 나오면서 (DirectSDK 설치폴더/Include) 선택
-
-
-//필요라이브러리 (DirectSDK 설치폴더/Lib/x86)
-//d3dx9.lib
-//d3d9.lib
-//#pragma comment( lib, "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Lib/x86/d3d9.lib" )
-//#pragma comment( lib, "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Lib/x86/d3dx9.lib" )
 #pragma comment( lib, "d3d9.lib" )
 #pragma comment( lib, "d3dx9.lib" )
 
 //헤더 추가
 #include "common.h"
+#include "MyUtil.h"
+#include "Singleton.h"
+#include "Device.h"
+
+#include "DXFontManager.h"
+#include "GizmoManager.h"
+#include "TimeMgr.h"
+#include "LogMgr.h"
+#include "KeyMgr.h"
+
+//공통 오브젝트
+#include "Transform.h"
+#include "Camera.h"
+
+//씬
+#include "Scene.h"
+
+extern HWND g_hWnd;

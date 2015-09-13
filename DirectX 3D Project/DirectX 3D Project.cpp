@@ -10,7 +10,7 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
-
+HWND g_hWnd;
 wakeup::Base::GameMain g_GameMain;
 
 // 이 코드 모듈에 들어 있는 함수의 정방향 선언입니다.
@@ -42,7 +42,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DIRECTX3DPROJECT));
 
+	//만들려는 작업영영의 크기
+	RECT rcClient = { 0, 0, WINSIZE_X, WINSIZE_Y };
+
+	//나 : rcClient 크기로 작업영역을 만들고 싶다.
+	//WINAPI : 음 그렇다면 윈도우 형태를 알여줘라, 또한 메뉴도 있는지 알여줘라 그렇다면 내가 
+	// 정확한 장업영역의 크기를 rcClient 알려주마. AdjustWindowRect 함수를 써라.
+	AdjustWindowRect(&rcClient, WIN_STYLE, FALSE);
+
+	//나 : 정확한 Client 의 영역을 알았으니 WindowSize를 변경해야지....
+	//WINAPI : 그렇다면... SetWindowPos 함수를 사용하렴....
+	SetWindowPos(g_hWnd,
+		NULL,
+		0, 0,		//위치는 0, 0, 으로...
+		rcClient.right - rcClient.left,	//가로 크기
+		rcClient.bottom - rcClient.top,	//세로 크기
+		SWP_NOZORDER | SWP_NOMOVE		//나 : API 야 크기만 변할꺼니깐 깊이 순서랑,  위치 는 무시해라...
+		);
+
+
     MSG msg;
+	ZeroMemory(&msg, sizeof(msg));
 
 	/*
     // 기본 메시지 루프입니다.
@@ -139,6 +159,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   g_hWnd = hWnd;
+
    return TRUE;
 }
 
@@ -173,6 +195,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+	case WM_KEYDOWN:
+		if (wParam == VK_ESCAPE)
+		{
+			DestroyWindow(hWnd);
+		}
+		break;
+		/*
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
@@ -181,13 +210,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
+		*/
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
     }
-    return 0;
+    return g_GameMain.WndProc(hWnd, message, wParam, lParam);
 }
 
 // 정보 대화 상자의 메시지 처리기입니다.
