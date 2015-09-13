@@ -35,7 +35,8 @@ namespace NS_ROOT
 		}
 		void Scene1::Release()
 		{
-
+			((*_camera).Camera::SetAutoUpdate)(true);
+			SAFE_DELETE(_camera);
 		}
 		void Scene1::Update(float timeDelta)
 		{
