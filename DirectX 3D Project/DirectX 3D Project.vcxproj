@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="DXFontManager.h" />
     <ClInclude Include="GizmoManager.h" />
     <ClInclude Include="KeyMgr.h" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DXFontManager.cpp" />
     <ClCompile Include="GizmoManager.cpp" />
     <ClCompile Include="KeyMgr.cpp" />

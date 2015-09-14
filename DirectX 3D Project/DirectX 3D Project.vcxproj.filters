@@ -13,26 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{8f279be6-bcad-4ca4-ab05-a73322502672}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Manager">
-      <UniqueIdentifier>{6cd2116b-14da-4fde-a30d-05b882e2d529}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common">
-      <UniqueIdentifier>{bd03b4a3-5e0b-45f6-b0e7-2580b66392e8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Util">
-      <UniqueIdentifier>{da44ac29-16ef-4baf-bfc6-4b78fc74756c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Transform">
-      <UniqueIdentifier>{d53c2294-fe48-4926-97f5-77c5b60730e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Camera">
-      <UniqueIdentifier>{6ae5a348-2a63-4793-9fb4-a480f4661914}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{47125eb1-ddaa-4b9a-a340-a0241a8a3302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{8f279be6-bcad-4ca4-ab05-a73322502672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Manager">
+      <UniqueIdentifier>{6cd2116b-14da-4fde-a30d-05b882e2d529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Common">
+      <UniqueIdentifier>{bd03b4a3-5e0b-45f6-b0e7-2580b66392e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Common\Transform">
+      <UniqueIdentifier>{d53c2294-fe48-4926-97f5-77c5b60730e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Common\Camera">
+      <UniqueIdentifier>{6ae5a348-2a63-4793-9fb4-a480f4661914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Util">
+      <UniqueIdentifier>{da44ac29-16ef-4baf-bfc6-4b78fc74756c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Shader">
+      <UniqueIdentifier>{4ffdb3af-2856-4e67-9d43-375fae9f7574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{517d4b09-0d85-4c46-b01e-43dc7a53bd84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{9c16f2b1-d6b1-4044-ae0c-55ebf84a328d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,46 +61,49 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameMain.h">
-      <Filter>Game</Filter>
+      <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="common.h">
-      <Filter>Game</Filter>
+      <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Device.h">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
-      <Filter>Game\Common</Filter>
+      <Filter>Framework\Common</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="MyUtil.h">
-      <Filter>Game\Util</Filter>
+      <Filter>Framework\Util</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Game\Common\Transform</Filter>
+      <Filter>Framework\Common\Transform</Filter>
     </ClInclude>
     <ClInclude Include="DXFontManager.h">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="GizmoManager.h">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="KeyMgr.h">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="TimeMgr.h">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="LogMgr.h">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Scene1.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Game\Common\Camera</Filter>
+      <Filter>Framework\Common\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,37 +114,40 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameMain.cpp">
-      <Filter>Game</Filter>
+      <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Device.cpp">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Game\Common\Transform</Filter>
+      <Filter>Framework\Common\Transform</Filter>
     </ClCompile>
     <ClCompile Include="MyUtil.cpp">
-      <Filter>Game\Util</Filter>
+      <Filter>Framework\Util</Filter>
     </ClCompile>
     <ClCompile Include="DXFontManager.cpp">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="GizmoManager.cpp">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="KeyMgr.cpp">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="TimeMgr.cpp">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="LogMgr.cpp">
-      <Filter>Game\Manager</Filter>
+      <Filter>Framework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Scene1.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Game\Common\Camera</Filter>
+      <Filter>Framework\Common\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

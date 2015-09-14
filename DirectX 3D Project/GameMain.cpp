@@ -57,9 +57,10 @@ namespace NS_ROOT
 			if (SUCCEEDED(result))
 			{
 				DEVICE->BeginScene();
-
+#ifdef _DEBUG
+				TIME_MGR->DrawTimeInfo();
 				GIZMO_MGR->WorldGrid(1, 10);
-
+#endif
 				if(_scene) _scene->Render();
 
 				DEVICE->EndScene();

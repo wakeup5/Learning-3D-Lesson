@@ -26,10 +26,13 @@ namespace NS_ROOT
 			_vertex[5] = PC_VERTEX(1, -1, 0, D3DCOLOR_XRGB(255, 0, 255));
 
 			DEVICE->SetRenderState(D3DRS_LIGHTING, false);
-
+			
 			_camera = new Camera;
 			_camera->SetAutoUpdate(true);
 			_camera->MovePositionWorld(D3DXVECTOR3(0, 5, -10));
+
+			_cube = new NS_OBJECTS::Cube;
+			_cube->Setup();
 
 			return S_OK;
 		}
@@ -42,11 +45,15 @@ namespace NS_ROOT
 		{
 			_camera->DefaultControl(timeDelta);
 			_camera->UpdateCamToDevice(DEVICE);
+
+			//_cube->DefaultControl(timeDelta);
 		}
 		void Scene1::Render()
 		{
 			DEVICE->SetFVF(PC_VERTEX::FVF);
 			DEVICE->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 2, _vertex, sizeof(PC_VERTEX));
+
+			_cube->Render();
 		}
 		LRESULT Scene1::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		{

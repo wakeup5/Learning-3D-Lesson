@@ -19,7 +19,7 @@
 #define WIN_TITLE	"Windows Exam"		//윈도우 타이틀 이름
 #define WIN_STYLE	WS_OVERLAPPEDWINDOW	//윈도우 형태
 
-#define BG_COLOR	D3DCOLOR_XRGB(127, 127, 255)
+#define BG_COLOR	D3DCOLOR_XRGB(63, 63, 63)
 
 //vertex
 typedef struct tagPC_VERTEX
