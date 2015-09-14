@@ -33,6 +33,8 @@ namespace NS_ROOT
 
 			_cube = new NS_OBJECTS::Cube;
 			_cube->Setup();
+			_cube->SetScale(0.5, 2, 0.5);
+			_cube->SetRotateWorld(RAD(45), RAD(45), RAD(45));
 
 			return S_OK;
 		}
@@ -46,7 +48,7 @@ namespace NS_ROOT
 			_camera->DefaultControl(timeDelta);
 			_camera->UpdateCamToDevice(DEVICE);
 
-			//_cube->DefaultControl(timeDelta);
+			
 		}
 		void Scene1::Render()
 		{

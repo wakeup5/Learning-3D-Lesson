@@ -9,6 +9,7 @@
 #define	VECTORZERO(v)			( FLOATZERO((v).x) && FLOATZERO((v).y) && FLOATZERO((v).z) )
 
 #define	ONE_RAD			(D3DX_PI / 180)
+#define RAD(dgree)		(ONE_RAD * (dgree))
 
 #define	RS(a,b)			DEVICE->SetRenderState((a),(b))		
 
