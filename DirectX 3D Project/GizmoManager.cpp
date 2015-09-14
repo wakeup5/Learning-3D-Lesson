@@ -3,7 +3,7 @@
 
 namespace NS_ROOT
 {
-	namespace NS_UTIL
+	namespace NS_DIRECTX
 	{
 		GizmoManager::GizmoManager(void)
 			//: m_pDevice(DEVICE)

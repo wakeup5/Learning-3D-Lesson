@@ -70,11 +70,9 @@ namespace NS_ROOT
 		//특정 Child 를 내자식으로 붙인다.
 		void Transform::AddChild(Transform* pNewChild)
 		{
-			//이미 내새끼면 할필요 없다
 			if (pNewChild->pParent == this)
 				return;
 
-			//너이새끼 내밑으로 들어올려면 부모랑 연을 끊어라...
 			pNewChild->ReleaseParent();
 
 			//부모의 상대적인 좌표값으로 갱신하기위해 
@@ -86,7 +84,8 @@ namespace NS_ROOT
 			D3DXVec3TransformCoord(&pNewChild->position, &pNewChild->position, &matInvFinal);
 
 			//축3개 변환하고 
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 3; i++) 
+			{
 				D3DXVec3TransformNormal(pNewChild->axis + i, pNewChild->axis + i, &matInvFinal);
 			}
 
@@ -101,25 +100,19 @@ namespace NS_ROOT
 			D3DXVec3Normalize(&pNewChild->forward, &pNewChild->forward);
 
 
-			//새로운 놈의 부모는 내가 된다.
 			pNewChild->pParent = this;
 
-			//나의 자식놈 포인터
 			Transform* pChild = this->pFirstChild;
 
-			//자식이 없는 쓸쓸한 독거노인이라면...
-			if (pChild == NULL) {
-				//안심하고 추가
+			if (pChild == NULL) 
+			{
 				this->pFirstChild = pNewChild;
 				pNewChild->pParent = this;
 			}
-
-			//대가족에 들어간다.
-			else {
-
-				while (pChild != NULL) {
-
-					//내가 들어갈 자리를 찾았다면...
+			else
+			{
+				while (pChild != NULL) 
+				{
 					if (pChild->pNextSibling == NULL)
 					{
 						pChild->pNextSibling = pNewChild;
@@ -144,65 +137,47 @@ namespace NS_ROOT
 		//부모와 안녕
 		void Transform::ReleaseParent()
 		{
-			//부모가 없니?
 			if (this->pParent == NULL)
 				return;
 
-			//부모랑 연을 끊기 전에 부모부터 자식연을 끊어라...
 			Transform* pChild = this->pParent->pFirstChild;
 
-			//내가 부모의 첫째자식이니?
-			if (pChild == this) {
+			if (pChild == this) 
+			{
 
-				//내다음 자식이 첫번째 자식이 된다.
 				this->pParent->pFirstChild = this->pNextSibling;
 
-				//형재들과의 연도 끊는다.
 				this->pNextSibling = NULL;
 			}
-
 			else
 			{
-				while (pChild != NULL) {
-
-					//현재 자식의 다음이 나니?
-					if (pChild->pNextSibling == this) {
-
+				while (pChild != NULL) 
+				{
+					if (pChild->pNextSibling == this) 
+					{
 						pChild->pNextSibling = this->pNextSibling;
-
-						//형재들과의 연도 끊는다.
 						this->pNextSibling = NULL;
-
 						break;
 					}
 
-					//다음 자식본다.
 					pChild = pChild->pNextSibling;
 				}
 			}
 
-			//부모랑 연을 끊어라...
 			this->pParent = NULL;
 
-			//자신의 현재 월드 위치에 대한 갱신이 필요하다.
-			//진짜월드 위치는 matFinal 이 다 가지고 있다.
-
-			//월드 위치 갱신
 			this->position.x = this->matFinal._41;
 			this->position.y = this->matFinal._42;
 			this->position.z = this->matFinal._43;
 
-			//3축 얻어온다.
 			D3DXVECTOR3 forwardScaled(this->matFinal._31, this->matFinal._32, this->matFinal._33);
 			D3DXVECTOR3 upScaled(this->matFinal._21, this->matFinal._22, this->matFinal._23);
 			D3DXVECTOR3 rightScaled(this->matFinal._11, this->matFinal._12, this->matFinal._13);
 
-			//3축에서 스케일 뺀다
 			float scaleX = D3DXVec3Length(&rightScaled);
 			float scaleY = D3DXVec3Length(&upScaled);
 			float scaleZ = D3DXVec3Length(&forwardScaled);
 
-			//정규화
 			D3DXVECTOR3 forwardUnit;
 			D3DXVECTOR3 upUnit;
 			D3DXVECTOR3 rightUnit;
@@ -210,20 +185,14 @@ namespace NS_ROOT
 			D3DXVec3Normalize(&upUnit, &upScaled);
 			D3DXVec3Normalize(&forwardUnit, &forwardScaled);
 
-			//정규화된 3축 대입
 			this->forward = forwardUnit;
 			this->right = rightUnit;
 			this->up = upUnit;
 
-
-			//스케일 대입
 			this->scale.x = scaleX;
 			this->scale.y = scaleY;
 			this->scale.z = scaleZ;
 
-			//나만의 새상이 되었다...
-
-			//부모랑 사라진 기념으로 Update 한번 콜
 			this->UpdateTransform();
 		}
 

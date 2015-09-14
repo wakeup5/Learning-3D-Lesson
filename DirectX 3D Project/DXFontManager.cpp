@@ -3,7 +3,7 @@
 
 namespace NS_ROOT
 {
-	namespace NS_UTIL
+	namespace NS_DIRECTX
 	{
 		DXFontManager::DXFontManager(void)
 			: m_pDefultFont(NULL)

@@ -5,9 +5,9 @@
 #include <map>
 namespace NS_ROOT
 {
-	namespace NS_UTIL
+	namespace NS_DIRECTX
 	{
-		class DXFontManager : public Singleton < DXFontManager >
+		class DXFontManager : public Util::Singleton < DXFontManager >
 		{
 		private:
 			typedef std::map< std::string, LPD3DXFONT>		MAP_FONT;
@@ -41,5 +41,5 @@ namespace NS_ROOT
 	}
 }
 
-#define DXFONT_MGR NS_ROOT::NS_UTIL::DXFontManager::GetInstance()
+#define DXFONT_MGR NS_ROOT::NS_DIRECTX::DXFontManager::GetInstance()
 

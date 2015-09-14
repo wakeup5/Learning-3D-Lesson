@@ -6,9 +6,9 @@
 
 namespace NS_ROOT
 {
-	namespace NS_UTIL
+	namespace NS_DIRECTX
 	{
-		class GizmoManager : public Singleton < GizmoManager >
+		class GizmoManager : public Util::Singleton < GizmoManager >
 		{
 		private:
 			typedef struct tagGIZMOVERTEX {
@@ -52,4 +52,4 @@ namespace NS_ROOT
 		};
 	}
 }
-#define GIZMO_MGR		NS_ROOT::NS_UTIL::GizmoManager::GetInstance()
+#define GIZMO_MGR		NS_ROOT::NS_DIRECTX::GizmoManager::GetInstance()

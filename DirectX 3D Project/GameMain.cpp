@@ -35,11 +35,11 @@ namespace NS_ROOT
 			SAFE_RELEASE(_scene);
 
 			NS_ROOT::DirectX::Device::ReleaseInstance();
-			NS_ROOT::Util::GizmoManager::ReleaseInstance();
+			NS_ROOT::DirectX::GizmoManager::ReleaseInstance();
+			NS_ROOT::DirectX::DXFontManager::ReleaseInstance();
 			NS_ROOT::Util::TimeMgr::ReleaseInstance();
 			NS_ROOT::Util::KeyMgr::ReleaseInstance();
 			NS_ROOT::Util::LogMgr::ReleaseInstance();
-			NS_ROOT::Util::DXFontManager::ReleaseInstance();
 		}
 
 		void GameMain::Update()
@@ -57,6 +57,8 @@ namespace NS_ROOT
 			if (SUCCEEDED(result))
 			{
 				DEVICE->BeginScene();
+
+				GIZMO_MGR->WorldGrid(1, 10);
 
 				if(_scene) _scene->Render();
 
