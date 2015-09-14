@@ -65,9 +65,17 @@ typedef struct tagPT_VERTEX
 	{
 		tagPT_VERTEX(0, 0, 0, 0, 0);
 	}
+	tagPT_VERTEX(D3DXVECTOR3 pos)
+	{
+		tagPT_VERTEX(pos.x, pos.y, pos.z, 0, 0);
+	}
 	tagPT_VERTEX(float x, float y, float z)
 	{
 		tagPT_VERTEX(x, y, z, 0, 0);
+	}
+	tagPT_VERTEX(D3DXVECTOR3 pos, D3DXVECTOR2 tex)
+	{
+		tagPT_VERTEX(pos.x, pos.y, pos.z, tex.x, tex.y);
 	}
 	tagPT_VERTEX(float x, float y, float z, float u, float v)
 	{
