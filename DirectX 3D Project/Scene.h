@@ -14,8 +14,18 @@ namespace NS_ROOT
 			virtual void Update(float timeDelta) = 0;
 			virtual void Render() = 0;
 
-			virtual LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam) = 0;
+			virtual inline LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+			{
+				return DefWindowProc(hWnd, iMessage, wParam, lParam);
+			}
 		};
+
+		/*
+		LRESULT CALLBACK Scene::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+		{
+			return DefWindowProc(hWnd, iMessage, wParam, lParam);
+		}
+		*/
 	}
 }
 

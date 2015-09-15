@@ -45,8 +45,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -80,6 +80,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -145,15 +147,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="숙제.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Asciitok.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="cAseLoader.h" />
+    <ClInclude Include="cFrame.h" />
+    <ClInclude Include="cGroup.h" />
+    <ClInclude Include="cMtlTex.h" />
+    <ClInclude Include="cObject.h" />
+    <ClInclude Include="cObjectManager.h" />
+    <ClInclude Include="cObjLoader.h" />
+    <ClInclude Include="cObjMap.h" />
+    <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DXFontManager.h" />
     <ClInclude Include="GizmoManager.h" />
+    <ClInclude Include="iMap.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="LogMgr.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="Scene_15_09_15.h" />
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="DirectX 3D Project.h" />
@@ -169,11 +184,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="cAseLoader.cpp" />
+    <ClCompile Include="cFrame.cpp" />
+    <ClCompile Include="cGroup.cpp" />
+    <ClCompile Include="cMtlTex.cpp" />
+    <ClCompile Include="cObject.cpp" />
+    <ClCompile Include="cObjectManager.cpp" />
+    <ClCompile Include="cObjLoader.cpp" />
+    <ClCompile Include="cObjMap.cpp" />
+    <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DXFontManager.cpp" />
     <ClCompile Include="GizmoManager.cpp" />
+    <ClCompile Include="iMap.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="LogMgr.cpp" />
+    <ClCompile Include="Scene_15_09_15.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="DirectX 3D Project.cpp" />
@@ -193,7 +219,54 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DirectX 3D Project.ico" />
+    <Image Include="resource\obj\box.jpg" />
+    <Image Include="resource\obj\Ca_Vill_StreetLight_01.tga" />
+    <Image Include="resource\obj\Ca_Vill_StreetLight_01_N.tga" />
+    <Image Include="resource\obj\Map__21_Normal_Bump.tga" />
+    <Image Include="resource\obj\Map__297_Normal_Bump.tga" />
+    <Image Include="resource\obj\NMP_Ripples2_512.dds" />
+    <Image Include="resource\obj\seafloor.dds" />
+    <Image Include="resource\obj\WS_Canon_01_D.tga" />
+    <Image Include="resource\obj\WS_Canon_01_S.tga" />
+    <Image Include="resource\woman\body_woman_01_s.jpg" />
+    <Image Include="resource\woman\body_woman_01_s_normal.tga" />
+    <Image Include="resource\woman\face_woman_02_s.jpg" />
+    <Image Include="resource\woman\face_woman_02_s_normal.tga" />
+    <Image Include="resource\woman\foot_woman_01.jpg" />
+    <Image Include="resource\woman\foot_woman_01_normal.tga" />
+    <Image Include="resource\woman\hair_woman_01.jpg" />
+    <Image Include="resource\woman\hair_woman_01_normal.tga" />
+    <Image Include="resource\woman\hand_woman_01.jpg" />
+    <Image Include="resource\woman\hand_woman_01_normal.tga" />
+    <Image Include="resource\woman\leg_woman_01_s.jpg" />
+    <Image Include="resource\woman\leg_woman_01_s_normal.tga" />
+    <Image Include="resource\woman\rabbit.jpg" />
+    <Image Include="resource\woman\rabbit_normal.tga" />
+    <Image Include="resource\woman\shield.jpg" />
+    <Image Include="resource\woman\shield_normal.tga" />
+    <Image Include="resource\woman\sword_001.jpg" />
+    <Image Include="resource\woman\sword_001_normal.tga" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\obj\box.mtl" />
+    <None Include="resource\obj\cannon.mtl" />
+    <None Include="resource\obj\cannon2.mtl" />
+    <None Include="resource\obj\Map.mtl" />
+    <None Include="resource\obj\map_surface.mtl" />
+    <None Include="resource\obj\streetLight.mtl" />
+    <None Include="resource\woman\woman_01_all.ASE" />
+    <None Include="resource\woman\woman_01_all_normal.ASE" />
+    <None Include="resource\woman\woman_01_all_stand.ASE" />
+    <None Include="resource\woman\woman_01_all_stand_normal.ASE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="resource\obj\box.obj" />
+    <Object Include="resource\obj\cannon.obj" />
+    <Object Include="resource\obj\cannon2.obj" />
+    <Object Include="resource\obj\Map.obj" />
+    <Object Include="resource\obj\map_surface.obj" />
+    <Object Include="resource\obj\streetLight.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

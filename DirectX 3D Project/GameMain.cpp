@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameMain.h"
 #include "Scene1.h"
+#include "Scene_15_09_15.h"
 
 namespace NS_ROOT
 {
@@ -24,7 +25,7 @@ namespace NS_ROOT
 			DXFONT_MGR->Setup(DEVICE);
 			GIZMO_MGR->Setup(DEVICE);
 
-			_scene = new Scene1;
+			_scene = new Scene_15_09_15;
 			_scene->Setup();
 
 			return S_OK;

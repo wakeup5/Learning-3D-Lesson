@@ -40,7 +40,7 @@ namespace NS_ROOT
 		}
 		void Scene1::Release()
 		{
-			((*_camera).Camera::SetAutoUpdate)(true);
+			//((*_camera).Camera::SetAutoUpdate)(true);
 			SAFE_DELETE(_camera);
 		}
 		void Scene1::Update(float timeDelta)
@@ -56,11 +56,6 @@ namespace NS_ROOT
 			DEVICE->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 2, _vertex, sizeof(PC_VERTEX));
 
 			_cube->Render();
-		}
-		LRESULT Scene1::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
-		{
-
-			return DefWindowProc(hWnd, iMessage, wParam, lParam);
 		}
 	}
 }

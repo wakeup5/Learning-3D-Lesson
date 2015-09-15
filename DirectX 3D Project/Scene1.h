@@ -26,8 +26,6 @@ namespace NS_ROOT
 			virtual void Release();
 			virtual void Update(float timeDelta);
 			virtual void Render();
-
-			virtual LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 		};
 	}
 }
