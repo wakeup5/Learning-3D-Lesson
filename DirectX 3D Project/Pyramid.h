@@ -4,8 +4,11 @@ namespace NS_ROOT
 {
 	namespace NS_OBJECTS
 	{
-		class Pyramid : public Figure
+		class Pyramid : public FigureC
 		{
+		private:
+			DWORD _color = 0xffffffff;
+			DWORD _startTime;
 		public:
 			Pyramid();
 			virtual ~Pyramid();
@@ -14,6 +17,11 @@ namespace NS_ROOT
 			void Release();
 			void Update();
 			void Render();
+
+			inline void SetColor(DWORD c) { _color = c; }
+
+			float angleY = 0;
+			bool _b = false;
 		};
 	}
 }

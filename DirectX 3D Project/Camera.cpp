@@ -40,10 +40,7 @@ namespace NS_ROOT
 			//뷰행렬 카메라 월드위치에 대한 역행렬이다.
 			D3DXMatrixInverse(&matView, NULL, &matFinal);
 
-
 			this->matViewProjection = this->matView * this->matProjection;
-
-
 		}
 
 		//View 행렬과 투영 행렬을 셋팅

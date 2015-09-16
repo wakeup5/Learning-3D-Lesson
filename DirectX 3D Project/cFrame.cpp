@@ -37,7 +37,7 @@ void cFrame::Render()
 	if(m_pMtlTex)
 	{
 		DEVICE->SetTransform(D3DTS_WORLD, &m_matWorldTM);
-		DEVICE->SetTexture(0, m_pMtlTex->GetTexture());
+		//DEVICE->SetTexture(0, m_pMtlTex->GetTexture());
 		//DEVICE->SetTexture(0, NULL);
 		DEVICE->SetMaterial(&m_pMtlTex->GetMaterial());
 		//DEVICE->SetTransform(D3DTS_WORLD, &m_matWorld);

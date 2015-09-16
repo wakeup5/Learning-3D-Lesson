@@ -48,6 +48,11 @@ namespace NS_ROOT
 				return m_FrameDeltaSec;
 			}
 
+			double GetLastTime()
+			{
+				return m_TotalSec;
+			}
+
 
 		};
 	}

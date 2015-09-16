@@ -5,8 +5,7 @@ namespace NS_ROOT
 {
 	namespace NS_OBJECTS
 	{
-		class Figure :
-			public Transform
+		class Figure : public Transform
 		{
 		protected:
 			LPDIRECT3DTEXTURE9 _texture;
@@ -17,6 +16,25 @@ namespace NS_ROOT
 		public:
 			Figure();
 			virtual ~Figure();
+
+			virtual HRESULT Setup(LPDIRECT3DTEXTURE9 t = NULL);
+			virtual void Release();
+			virtual void Update();
+			virtual void Render();
+		};
+
+		
+		class FigureC : public Transform
+		{
+		protected:
+			LPDIRECT3DTEXTURE9 _texture;
+			PC_VERTEX* _vertex;
+			int _size;
+
+			void initFigure(int size);
+		public:
+			FigureC();
+			virtual ~FigureC();
 
 			virtual HRESULT Setup(LPDIRECT3DTEXTURE9 t = NULL);
 			virtual void Release();

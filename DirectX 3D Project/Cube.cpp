@@ -66,10 +66,16 @@ namespace NS_ROOT
 
 			for (int i = 0; i < 6; ++i)
 			{
+				D3DXVECTOR3 normal;
+
+				D3DXVec3Cross(&normal, &(cubes[face[i][1]] - cubes[face[i][0]]), &(cubes[face[i][2]] - cubes[face[i][0]]));
+				D3DXVec3Normalize(&normal, &normal);
+
 				for (int j = 0; j < 6; ++j)
 				{
 					_vertex[i * 6 + j].p = cubes[face[i][index[j]]];
 					_vertex[i * 6 + j].t = tex[index[j]];
+					_vertex[i * 6 + j].n = normal;
 				}
 			}
 
@@ -83,11 +89,7 @@ namespace NS_ROOT
 
 		void Cube::Update()
 		{
-			D3DXMATRIXA16 rot;
-
-			D3DXMatrixRotationY(&rot, RAD((GetTickCount() / 10) % 360));
-
-			this->SetRotateLocal(rot);
+			
 		}
 
 		void Cube::Render()

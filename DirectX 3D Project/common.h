@@ -95,4 +95,35 @@ typedef struct tagPNT_VERTEX
 	{
 
 	}
+	tagPNT_VERTEX(float x, float y, float z)
+	{
+		p = D3DXVECTOR3(x, y, z);
+	}
+	tagPNT_VERTEX(D3DXVECTOR3 pos)
+	{
+		p = pos;
+	}
+	tagPNT_VERTEX(float x, float y, float z, float nx, float ny, float nz)
+	{
+		p = D3DXVECTOR3(x, y, z);
+		n = D3DXVECTOR3(nx, ny, nz);
+	}
+	tagPNT_VERTEX(D3DXVECTOR3 pos, D3DXVECTOR3 nor)
+	{
+		p = pos;
+		n = nor;
+	}
+	tagPNT_VERTEX(float x, float y, float z, float nx, float ny, float nz, float u, float v)
+	{
+		p = D3DXVECTOR3(x, y, z);
+		n = D3DXVECTOR3(nx, ny, nz);
+		t = D3DXVECTOR2(u, v);
+	}
+	tagPNT_VERTEX(D3DXVECTOR3 pos, D3DXVECTOR3 nor, D3DXVECTOR2 tex)
+	{
+		p = pos;
+		n = nor;
+		t = tex;
+	}
+
 } PNT_VERTEX, FAR *LPPNT_VERTEX;

@@ -6,6 +6,9 @@
 #include "cObjLoader.h"
 #include "cObjMap.h"
 #include "Cube.h"
+#include "Pyramid.h"
+#include "Charactor.h"
+#include "ActionMoveBezier.h"
 
 class Scene_15_09_15 :
 	public NS_ROOT::NS_BASE::Scene
@@ -19,9 +22,11 @@ private:
 	D3DXVECTOR3 _posWoman;
 	D3DXVECTOR3 _dirWoman;
 	D3DXVECTOR3 _cRot;
+	D3DXVECTOR3 _look;
 	//∏ 
 	std::vector<cGroup*> m_vecGroup;
 	cObjMap* _om;
+	D3DXMATRIXA16 matWorld;
 
 	//≈•∫Í¡Ó
 	NS_ROOT::NS_OBJECTS::Cube* _cubes[10];
@@ -30,6 +35,13 @@ private:
 	LPDIRECT3DTEXTURE9 _tex[3];
 
 	int _score = 0;
+
+	NS_ROOT::NS_OBJECTS::Pyramid* _bullets[10];
+
+
+	//
+	NS_ROOT::NS_OBJECTS::Charactor* _char;
+	NS_ROOT::Objects::ActionMoveBezier* ac;
 public:
 	Scene_15_09_15();
 	virtual ~Scene_15_09_15();

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Scene_15_09_15.h"
 
+using namespace NS_ROOT;
 
 Scene_15_09_15::Scene_15_09_15()
 {
@@ -23,24 +24,21 @@ HRESULT Scene_15_09_15::Setup()
 	cObjLoader ol;
 	ol.Load(m_vecGroup, "obj", "map.obj");
 
-	
-
-	D3DXMATRIXA16 matWorld, matS, matR;
+	D3DXMATRIXA16 matS, matR;
 	D3DXMatrixScaling(&matS, 0.02, 0.02, 0.02);
 	D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0f);
 	matWorld = matS * matR;
 
-	_om = new cObjMap("obj", "map.obj", &matWorld);
+	_om = new cObjMap("obj", "map_surface.obj", &matWorld);
 	
 	_camera = new NS_ROOT::NS_OBJECTS::Camera;
 	_camera->SetAutoUpdate(true);
 	_camera->MovePositionWorld(D3DXVECTOR3(0, 5, -10));
 
-	DEVICE->SetRenderState(D3DRS_LIGHTING, false);
-
 	_posWoman = D3DXVECTOR3(0, 0, 0);
 	_dirWoman = D3DXVECTOR3(0, 0, 0);
 	_cRot = D3DXVECTOR3(0, 0, 0);
+	_look = { 0, 10, 0 };
 
 	//텍스쳐들
 	LPDIRECT3DTEXTURE9 t1, t2, t3;
@@ -56,18 +54,27 @@ HRESULT Scene_15_09_15::Setup()
 	{
 		_cubes[i] = NULL;
 	}
-	_cubes[0] = new NS_ROOT::NS_OBJECTS::Cube;
-	_cubes[0]->Setup(_tex[NS_ROOT::NS_UTIL::RandomIntRange(0, 3)]);
+	for (int i = 0; i < 10; i++)
+	{
+		_bullets[i] = NULL;
+	}
 
-	NS_ROOT::NS_UTIL::SetRandomSeed();
+	NS_ROOT::NS_UTIL::SetRandomSeed(); 
 	DEVICE->SetRenderState(D3DRS_LIGHTING, false);
+	
+	_char = new NS_ROOT::Objects::Charactor;
+	
+	ac = new Objects::ActionMoveBezier;
+	ac->AddPoint(D3DXVECTOR3(-20, 3, -0));
+	ac->AddPoint(D3DXVECTOR3(-0, 3, -10));
+	ac->AddPoint(D3DXVECTOR3(-20, 3, -20));
+	ac->AddPoint(D3DXVECTOR3(-0, 3, -30));
+	ac->AddPoint(D3DXVECTOR3(-20, 3, -40));
+	ac->SetActionTime(5.0f);
+	ac->SetDeligate(_char);
 
-	DEVICE->SetSamplerState(0,
-		D3DSAMP_ADDRESSU,		//U 가로 진행 방식 설정
-		D3DTADDRESS_CLAMP);
-	DEVICE->SetSamplerState(0,
-		D3DSAMP_ADDRESSV,		//V 세로 진행 방식 설정
-		D3DTADDRESS_WRAP);
+	_char->SetAction(ac);
+	ac->Start();
 
 	return S_OK;
 }
@@ -76,28 +83,48 @@ void Scene_15_09_15::Release()
 	SAFE_DELETE(_camera);
 	m_pRootFrame->Release();
 	//delete m_pRootFrame;
+
+	SAFE_DELETE(_char);
 }
 void Scene_15_09_15::Update(float timeDelta)
 {
-	
+	if (KEY_MGR->IsStayDown(VK_LEFT))
+	{
+		_cRot.y -= RAD(5);
+	}
+	if (KEY_MGR->IsStayDown(VK_RIGHT))
+	{
+		_cRot.y += RAD(5);
+	}
 
-	D3DXVECTOR3 cd = D3DXVECTOR3(0, 5, 10) / 10;
+	D3DXVECTOR3 cd = D3DXVECTOR3(0, 5, 10);
 	D3DXMATRIXA16 cry, crx, cr;
 	D3DXMatrixRotationY(&cry, _cRot.y);
 	D3DXMatrixRotationX(&crx, -_cRot.x);
 	cr = cry * crx;
 	D3DXVec3TransformCoord(&cd, &cd, &cr);
 
+	_look = _look + (_posWoman - _look) / 20;
 
-	D3DXVECTOR3 look = _camera->GetWorldPosition() + (_posWoman - _camera->GetWorldPosition()) / 10;
-	D3DXVECTOR3 cp = look + cd;
-	_camera->SetWorldPosition(cp);
-	_camera->LookPosition(look);
+	_camera->SetWorldPosition(_look + cd);
+	_camera->LookPosition(_look);
 	_camera->UpdateCamToDevice(DEVICE);
 
 	KeyControl();
 	CreateCube();
 	CreateBullet();
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (_bullets[i] != NULL)
+		{
+
+			_bullets[i]->Update();
+
+			if (_bullets[i]->_b) SAFE_RELEASE(_bullets[i]);
+		}
+
+	}
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -115,19 +142,51 @@ void Scene_15_09_15::Update(float timeDelta)
 		}
 	}
 
+	for (int i = 0; i < 10; i++)
+	{
+		if (_bullets[i] != NULL)
+		{
+			float distance = D3DXVec3Length(&(_bullets[i]->GetWorldPosition() - _char->GetWorldPosition()));
+			if (distance < 2.4)
+			{
+				SAFE_RELEASE(_char);
+				_score += 100;
+
+				_bullets[i]->_b = true;
+
+				_char = new Objects::Charactor;
+
+
+				ac->ClearPoint();
+				D3DXVECTOR3 pos;
+
+				for (int i = 0; i < 5; i++)
+				{
+					pos.x = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 20);
+					pos.y = 3;
+					pos.z = NS_ROOT::NS_UTIL::RandomFloatRange(-50, 0);
+
+					ac->AddPoint(pos);
+				}
+
+				ac->SetDeligate(_char);
+
+				_char->SetAction(ac);
+				ac->Start();
+
+				break;
+			}
+		}
+	}
+
+	_char->Update();
 }
 void Scene_15_09_15::Render()
 {
 	m_pRootFrame->Render();
 
-	D3DXMATRIXA16 matWorld, matS, matR;
 
 	DEVICE->SetTexture(0, NULL);
-
-	D3DXMatrixScaling(&matS, 0.02, 0.02, 0.02);
-	D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0f);
-	matWorld = matS * matR;
-
 	DEVICE->SetTransform(D3DTS_WORLD, &matWorld);
 	for each(auto p in m_vecGroup)
 	{
@@ -141,6 +200,15 @@ void Scene_15_09_15::Render()
 			_cubes[i]->Render();
 		}
 	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (_bullets[i] != NULL) 
+			_bullets[i]->Render();
+	}
+
+	_char->Render();
+
 	DEVICE->SetTexture(0, NULL);
 	
 	DXFONT_MGR->PrintText(std::to_string(_score), 10, 200, 0xff000000);
@@ -162,15 +230,6 @@ void Scene_15_09_15::KeyControl()
 	{
 		int nKeyFrame = (GetTickCount() * 10) % (3200 - 640) + 640;
 		m_pRootFrame->Update(nKeyFrame, &totalMat);
-	}
-
-	if (KEY_MGR->IsStayDown(VK_LEFT))
-	{
-		_cRot.y -= RAD(5);
-	}
-	if (KEY_MGR->IsStayDown(VK_RIGHT))
-	{
-		_cRot.y += RAD(5);
 	}
 
 	if (_om->GetHeight(nextM.x, nextM.y, nextM.z))
@@ -231,5 +290,17 @@ void Scene_15_09_15::CreateCube()
 
 void Scene_15_09_15::CreateBullet()
 {
+	if (KEY_MGR->IsStayDown(VK_SPACE))
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			if (_bullets[i] != NULL) continue;
 
+			_bullets[i] = new NS_ROOT::NS_OBJECTS::Pyramid;
+			_bullets[i]->Setup();
+			_bullets[i]->SetWorldPosition(_posWoman.x, _posWoman.y + 1, _posWoman.z);
+			_bullets[i]->angleY = _dirWoman.y - RAD(180);
+			break;
+		}
+	}
 }
