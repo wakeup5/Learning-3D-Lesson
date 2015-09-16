@@ -16,8 +16,8 @@ namespace NS_ROOT
 
 		HRESULT Cube::Setup(LPDIRECT3DTEXTURE9 t)
 		{
-			_texture = t;
-			t->AddRef();
+			Figure::Setup(t);
+			initFigure(36);
 
 			//8개의 정점
 			D3DXVECTOR3 cubes[8];
@@ -78,7 +78,7 @@ namespace NS_ROOT
 
 		void Cube::Release()
 		{
-			_texture->Release();
+			Figure::Release();
 		}
 
 		void Cube::Update()
@@ -92,11 +92,7 @@ namespace NS_ROOT
 
 		void Cube::Render()
 		{
-			DEVICE->SetTransform(D3DTS_WORLD, &this->GetFinalMatrix());
-
-			DEVICE->SetTexture(0, _texture);
-			DEVICE->SetFVF(PNT_VERTEX::FVF);
-			DEVICE->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 12, _vertex, sizeof(PNT_VERTEX));
+			Figure::Render();
 		}
 	}
 }

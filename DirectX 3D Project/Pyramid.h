@@ -4,11 +4,11 @@ namespace NS_ROOT
 {
 	namespace NS_OBJECTS
 	{
-		class Cube : public Figure
+		class Pyramid : public Figure
 		{
 		public:
-			Cube();
-			virtual ~Cube();
+			Pyramid();
+			virtual ~Pyramid();
 
 			HRESULT Setup(LPDIRECT3DTEXTURE9 t = NULL);
 			void Release();

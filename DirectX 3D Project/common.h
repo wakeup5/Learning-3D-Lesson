@@ -24,33 +24,32 @@
 //vertex
 typedef struct tagPC_VERTEX
 {
-	D3DXVECTOR3 p;
-	DWORD		c;
+	D3DXVECTOR3 p = { 0, 0, 0 };
+	DWORD		c = 0;
 	static enum { FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE };
 
 	tagPC_VERTEX() 
 	{
-		tagPC_VERTEX(0, 0, 0, 0);
+
 	}
 	tagPC_VERTEX(D3DXVECTOR3 pos)
 	{
-		tagPC_VERTEX(pos.x, pos.y, pos.z, 0);
+		p = pos;
+		c = 0;
 	}
 	tagPC_VERTEX(float x, float y, float z)
 	{
-		tagPC_VERTEX(x, y, z, 0);
+		p = D3DXVECTOR3(x, y, z);
+		c = 0;
 	}
 	tagPC_VERTEX(D3DXVECTOR3 pos, D3DCOLOR color)
 	{
-		tagPC_VERTEX(pos.x, pos.y, pos.z, color);
+		p = pos;
+		c = color;
 	}
 	tagPC_VERTEX(float x, float y, float z, D3DCOLOR color)
 	{
-		ZeroMemory(&p, sizeof(p));
-		p.x = x;
-		p.y = y;
-		p.z = z;
-
+		p = D3DXVECTOR3(x, y, z);
 		c = color;
 	}
 } PC_VERTEX, FAR *LPPC_VEREX;
@@ -59,7 +58,7 @@ typedef struct tagPT_VERTEX
 {
 	D3DXVECTOR3 p = { 0, 0, 0 };
 	D3DXVECTOR2	t = { 0, 0 };
-	static enum { FVF = D3DFVF_XYZ | D3DFVF_TEX0 };
+	static enum { FVF = D3DFVF_XYZ | D3DFVF_TEX1 };
 
 	tagPT_VERTEX() 
 	{
@@ -71,9 +70,7 @@ typedef struct tagPT_VERTEX
 	}
 	tagPT_VERTEX(float x, float y, float z)
 	{
-		p.x = x;
-		p.y = y;
-		p.z = z;
+		p = D3DXVECTOR3(x, y, z);
 	}
 	tagPT_VERTEX(D3DXVECTOR3 &pos, D3DXVECTOR2 &tex)
 	{
@@ -82,19 +79,20 @@ typedef struct tagPT_VERTEX
 	}
 	tagPT_VERTEX(float x, float y, float z, float u, float v)
 	{
-		p.x = x;
-		p.y = y;
-		p.z = z;
-
-		t.x = u;
-		t.y = v;
+		p = D3DXVECTOR3(x, y, z);
+		t = D3DXVECTOR2(u, v);
 	}
 } PT_VERTEX, FAR *LPPT_VEREX;
 
 typedef struct tagPNT_VERTEX
 {
-	D3DXVECTOR3 p;
-	D3DXVECTOR3	n;
-	D3DXVECTOR2 t;
+	D3DXVECTOR3 p = { 0, 0, 0 };
+	D3DXVECTOR3	n = { 0, 0, 0 };
+	D3DXVECTOR2 t = { 0, 0 };
 	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 };
+
+	tagPNT_VERTEX()
+	{
+
+	}
 } PNT_VERTEX, FAR *LPPNT_VERTEX;

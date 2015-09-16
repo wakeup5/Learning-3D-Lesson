@@ -13,6 +13,8 @@ class Scene_15_09_15 :
 private:
 	NS_ROOT::NS_OBJECTS::Camera* _camera;
 	cFrame* m_pRootFrame;
+	cFrame* m_pRootSt;
+	cFrame* m_pRootRun;
 
 	D3DXVECTOR3 _posWoman;
 	D3DXVECTOR3 _dirWoman;
@@ -36,5 +38,9 @@ public:
 	virtual void Release();
 	virtual void Update(float timeDelta);
 	virtual void Render();
+
+	void KeyControl();
+	void CreateCube();
+	void CreateBullet();
 };
 

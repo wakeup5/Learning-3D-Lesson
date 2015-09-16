@@ -15,12 +15,22 @@ Scene_15_09_15::~Scene_15_09_15()
 HRESULT Scene_15_09_15::Setup()
 {
 	cAseLoader l;
-	m_pRootFrame = l.Load("woman/woman_01_all.ASE");
+	m_pRootRun = l.Load("woman/woman_01_all.ASE");
+	m_pRootSt = l.Load("woman/woman_01_all_stand.ASE");
+
+	m_pRootFrame = m_pRootSt;
 
 	cObjLoader ol;
 	ol.Load(m_vecGroup, "obj", "map.obj");
 
-	_om = new cObjMap("obj", "map.obj", NULL);
+	
+
+	D3DXMATRIXA16 matWorld, matS, matR;
+	D3DXMatrixScaling(&matS, 0.02, 0.02, 0.02);
+	D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0f);
+	matWorld = matS * matR;
+
+	_om = new cObjMap("obj", "map.obj", &matWorld);
 	
 	_camera = new NS_ROOT::NS_OBJECTS::Camera;
 	_camera->SetAutoUpdate(true);
@@ -31,16 +41,6 @@ HRESULT Scene_15_09_15::Setup()
 	_posWoman = D3DXVECTOR3(0, 0, 0);
 	_dirWoman = D3DXVECTOR3(0, 0, 0);
 	_cRot = D3DXVECTOR3(0, 0, 0);
-
-	D3DXMATRIXA16 matWorld, matS, matR;
-
-	D3DXMatrixScaling(&matS, 0.02, 0.02, 0.02);
-	D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0f);
-	matWorld = matS * matR;
-	for (int i = 0; i < _om->m_vecSurface.size(); i++)
-	{
-		D3DXVec3TransformCoord(&_om->m_vecSurface[i], &_om->m_vecSurface[i], &matWorld);
-	}
 
 	//텍스쳐들
 	LPDIRECT3DTEXTURE9 t1, t2, t3;
@@ -79,97 +79,31 @@ void Scene_15_09_15::Release()
 }
 void Scene_15_09_15::Update(float timeDelta)
 {
-	D3DXMATRIXA16 totalMat, transMat, rotMat;
-	D3DXMatrixTranslation(&transMat, _posWoman.x, _posWoman.y, _posWoman.z);
-	D3DXMatrixRotationY(&rotMat, _dirWoman.y);
-	totalMat = rotMat * transMat;
+	
 
-	D3DXVECTOR3 direction = D3DXVECTOR3(0, 0, 1);
-	D3DXVec3TransformNormal(&direction, &direction, &rotMat);
-
-	D3DXVECTOR3 nextM = _posWoman - (direction / 10);
-
-	if (_om->GetHeight(nextM.x, nextM.y, nextM.z))
-	{
-		if (KEY_MGR->IsStayDown('W'))
-		{
-			_posWoman -= (direction / 10);
-		}
-		if (KEY_MGR->IsStayDown('S'))
-		{
-			_posWoman += (direction / 10);
-		}
-
-		_posWoman.y = nextM.y;
-	}
-
-	if (KEY_MGR->IsStayDown('A'))
-	{
-		_dirWoman.y -= RAD(5);
-	}
-	if (KEY_MGR->IsStayDown('D'))
-	{
-		_dirWoman.y += RAD(5);
-	}
-
-	if (m_pRootFrame)
-	{
-		int nKeyFrame = (GetTickCount() * 10) % (3200 - 640) + 640;
-		m_pRootFrame->Update(nKeyFrame, &totalMat);
-	}
-
-	if (KEY_MGR->IsStayDown(VK_LEFT))
-	{
-		_cRot.y -= RAD(5);
-	}
-	if (KEY_MGR->IsStayDown(VK_RIGHT))
-	{
-		_cRot.y += RAD(5);
-	}
-
-	D3DXVECTOR3 cd = D3DXVECTOR3(0, 5, 10);
+	D3DXVECTOR3 cd = D3DXVECTOR3(0, 5, 10) / 10;
 	D3DXMATRIXA16 cry, crx, cr;
 	D3DXMatrixRotationY(&cry, _cRot.y);
 	D3DXMatrixRotationX(&crx, -_cRot.x);
 	cr = cry * crx;
 	D3DXVec3TransformCoord(&cd, &cd, &cr);
 
-	_camera->SetWorldPosition(_posWoman + cd);
-	_camera->LookPosition(_posWoman);
+
+	D3DXVECTOR3 look = _camera->GetWorldPosition() + (_posWoman - _camera->GetWorldPosition()) / 10;
+	D3DXVECTOR3 cp = look + cd;
+	_camera->SetWorldPosition(cp);
+	_camera->LookPosition(look);
 	_camera->UpdateCamToDevice(DEVICE);
 
-
-	//큐브들
-	for (int i = 0; i < 10; i++)
-	{
-		if (_cubes[i] != NULL) continue;
-
-		//if (NS_ROOT::NS_UTIL::RandomFloatRange(0, 1) < 0.01)
-		{
-			D3DXVECTOR3 pos(0, 0, 0);
-			//do
-			{
-				pos.x = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 100);
-				pos.y = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 100);
-				pos.z = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 100);
-			} 
-			
-			if (!_om->GetHeight(pos.x, pos.y, pos.z)) continue;
-			pos.y += 1;
-			_cubes[i] = new NS_ROOT::NS_OBJECTS::Cube;
-			_cubes[i]->Setup(_tex[NS_ROOT::NS_UTIL::RandomIntRange(0, 3)]);
-
-			_cubes[i]->SetWorldPosition(pos);
-
-			_cubes[i]->SetScale(0.25, 0.25, 0.25);
-		}
-	}
+	KeyControl();
+	CreateCube();
+	CreateBullet();
 
 	for (int i = 0; i < 10; i++)
 	{
 		if (_cubes[i] != NULL)
 		{
-			float distance = NS_ROOT::NS_UTIL::GetDistance(_cubes[i]->GetWorldPosition(), _posWoman);
+			float distance = D3DXVec3Length(&(_cubes[i]->GetWorldPosition() - _posWoman));
 			if (distance < 2.4)
 			{
 				SAFE_RELEASE(_cubes[i]);
@@ -210,4 +144,92 @@ void Scene_15_09_15::Render()
 	DEVICE->SetTexture(0, NULL);
 	
 	DXFONT_MGR->PrintText(std::to_string(_score), 10, 200, 0xff000000);
+}
+
+void Scene_15_09_15::KeyControl()
+{
+	D3DXMATRIXA16 totalMat, transMat, rotMat;
+	D3DXMatrixTranslation(&transMat, _posWoman.x, _posWoman.y, _posWoman.z);
+	D3DXMatrixRotationY(&rotMat, _dirWoman.y);
+	totalMat = rotMat * transMat;
+
+	D3DXVECTOR3 direction = D3DXVECTOR3(0, 0, 1);
+	D3DXVec3TransformNormal(&direction, &direction, &rotMat);
+
+	D3DXVECTOR3 nextM = _posWoman - (direction / 10);
+
+	if (m_pRootFrame)
+	{
+		int nKeyFrame = (GetTickCount() * 10) % (3200 - 640) + 640;
+		m_pRootFrame->Update(nKeyFrame, &totalMat);
+	}
+
+	if (KEY_MGR->IsStayDown(VK_LEFT))
+	{
+		_cRot.y -= RAD(5);
+	}
+	if (KEY_MGR->IsStayDown(VK_RIGHT))
+	{
+		_cRot.y += RAD(5);
+	}
+
+	if (_om->GetHeight(nextM.x, nextM.y, nextM.z))
+	{
+		if (KEY_MGR->IsStayDown('W'))
+		{
+			_posWoman -= (direction / 10);
+			m_pRootFrame = m_pRootRun;
+		}
+		else if (KEY_MGR->IsStayDown('S'))
+		{
+			_posWoman += (direction / 10);
+			m_pRootFrame = m_pRootRun;
+		}
+		else
+		{
+			m_pRootFrame = m_pRootSt;
+		}
+
+		_posWoman.y = nextM.y;
+	}
+
+	if (KEY_MGR->IsStayDown('A'))
+	{
+		_dirWoman.y -= RAD(5);
+	}
+	if (KEY_MGR->IsStayDown('D'))
+	{
+		_dirWoman.y += RAD(5);
+	}
+}
+
+void Scene_15_09_15::CreateCube()
+{
+	//큐브들
+	for (int i = 0; i < 5; i++)
+	{
+		if (_cubes[i] != NULL) continue;
+
+		D3DXVECTOR3 pos(0, 0, 0);
+
+		pos.x = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 0);
+		pos.y = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 0);
+		pos.z = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 0);
+
+		if (!_om->GetHeight(pos.x, pos.y, pos.z)) continue;
+
+		pos.y += 1;
+
+		_cubes[i] = new NS_ROOT::NS_OBJECTS::Cube;
+		_cubes[i]->Setup(_tex[NS_ROOT::NS_UTIL::RandomIntRange(0, 3)]);
+
+		_cubes[i]->SetWorldPosition(pos);
+
+		_cubes[i]->SetScale(0.25, 0.25, 0.25);
+	}
+}
+
+void Scene_15_09_15::CreateBullet()
+{
+
 }

@@ -45,7 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
     <Text Include="숙제.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +141,12 @@
     <ClInclude Include="Cube.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Figure.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -219,6 +224,12 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Pyramid.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Figure.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX 3D Project.rc">
@@ -230,6 +241,36 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="DirectX 3D Project.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\obj\box.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\body_woman_01_s.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\face_woman_02_s.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\foot_woman_01.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\hair_woman_01.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\hand_woman_01.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\leg_woman_01_s.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\rabbit.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\shield.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\sword_001.jpg">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
