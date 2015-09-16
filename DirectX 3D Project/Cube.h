@@ -7,12 +7,13 @@ namespace NS_ROOT
 		class Cube : public Transform
 		{
 		private:
-			PC_VERTEX _vertex[36];
+			LPDIRECT3DTEXTURE9 _texture;
+			PNT_VERTEX _vertex[36];
 		public:
 			Cube();
 			virtual ~Cube();
 
-			HRESULT Setup();
+			HRESULT Setup(LPDIRECT3DTEXTURE9 t);
 			void Release();
 			void Update();
 			void Render();

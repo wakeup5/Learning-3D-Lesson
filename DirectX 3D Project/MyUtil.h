@@ -51,5 +51,7 @@ namespace NS_ROOT
 			const DWORD* pIndices,			//인덱스 배열포인터 ( 일단 인덱스는 DWORD 로 대동단결 )
 			int indicesNum					//인덱스 배열포인터 갯수
 			);
+
+		float GetDistance(const D3DXVECTOR3 &p1, const D3DXVECTOR3 &p2);
 	}
 }

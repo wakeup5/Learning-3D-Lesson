@@ -183,5 +183,11 @@ namespace NS_ROOT
 			}
 		}
 
+		float GetDistance(const D3DXVECTOR3 &p1, const D3DXVECTOR3 &p2)
+		{
+			D3DXVECTOR3 temp = p2 - p1;
+			return sqrt((temp.x * temp.x) + (temp.y * temp.y) + (temp.z * temp.z));
+		}
+
 	}
 }

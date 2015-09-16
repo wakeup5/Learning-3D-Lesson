@@ -32,7 +32,7 @@ namespace NS_ROOT
 			_camera->MovePositionWorld(D3DXVECTOR3(0, 5, -10));
 
 			_cube = new NS_OBJECTS::Cube;
-			_cube->Setup();
+			//_cube->Setup();
 			_cube->SetScale(0.5, 2, 0.5);
 			_cube->SetRotateWorld(RAD(45), RAD(45), RAD(45));
 

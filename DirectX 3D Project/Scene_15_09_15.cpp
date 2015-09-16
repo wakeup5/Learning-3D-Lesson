@@ -42,13 +42,40 @@ HRESULT Scene_15_09_15::Setup()
 		D3DXVec3TransformCoord(&_om->m_vecSurface[i], &_om->m_vecSurface[i], &matWorld);
 	}
 
+	//텍스쳐들
+	LPDIRECT3DTEXTURE9 t1, t2, t3;
+	D3DXCreateTextureFromFile(DEVICE, "./obj/Map__21_Normal_Bump.tga", &t1);
+	D3DXCreateTextureFromFile(DEVICE, "./obj/WS_Canon_01_S.tga", &t2);
+	D3DXCreateTextureFromFile(DEVICE, "./obj/box.jpg", &t3);
+
+	_tex[0] = t1;
+	_tex[1] = t2;
+	_tex[2] = t3;
+
+	for (int i = 0; i < 10; i++)
+	{
+		_cubes[i] = NULL;
+	}
+	_cubes[0] = new NS_ROOT::NS_OBJECTS::Cube;
+	_cubes[0]->Setup(_tex[NS_ROOT::NS_UTIL::RandomIntRange(0, 3)]);
+
+	NS_ROOT::NS_UTIL::SetRandomSeed();
+	DEVICE->SetRenderState(D3DRS_LIGHTING, false);
+
+	DEVICE->SetSamplerState(0,
+		D3DSAMP_ADDRESSU,		//U 가로 진행 방식 설정
+		D3DTADDRESS_CLAMP);
+	DEVICE->SetSamplerState(0,
+		D3DSAMP_ADDRESSV,		//V 세로 진행 방식 설정
+		D3DTADDRESS_WRAP);
+
 	return S_OK;
 }
 void Scene_15_09_15::Release()
 {
 	SAFE_DELETE(_camera);
 	m_pRootFrame->Release();
-	delete m_pRootFrame;
+	//delete m_pRootFrame;
 }
 void Scene_15_09_15::Update(float timeDelta)
 {
@@ -110,12 +137,58 @@ void Scene_15_09_15::Update(float timeDelta)
 	_camera->SetWorldPosition(_posWoman + cd);
 	_camera->LookPosition(_posWoman);
 	_camera->UpdateCamToDevice(DEVICE);
+
+
+	//큐브들
+	for (int i = 0; i < 10; i++)
+	{
+		if (_cubes[i] != NULL) continue;
+
+		//if (NS_ROOT::NS_UTIL::RandomFloatRange(0, 1) < 0.01)
+		{
+			D3DXVECTOR3 pos(0, 0, 0);
+			//do
+			{
+				pos.x = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 100);
+				pos.y = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 100);
+				pos.z = NS_ROOT::NS_UTIL::RandomFloatRange(-10, 100);
+			} 
+			
+			if (!_om->GetHeight(pos.x, pos.y, pos.z)) continue;
+			pos.y += 1;
+			_cubes[i] = new NS_ROOT::NS_OBJECTS::Cube;
+			_cubes[i]->Setup(_tex[NS_ROOT::NS_UTIL::RandomIntRange(0, 3)]);
+
+			_cubes[i]->SetWorldPosition(pos);
+
+			_cubes[i]->SetScale(0.25, 0.25, 0.25);
+		}
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (_cubes[i] != NULL)
+		{
+			float distance = NS_ROOT::NS_UTIL::GetDistance(_cubes[i]->GetWorldPosition(), _posWoman);
+			if (distance < 2.4)
+			{
+				SAFE_RELEASE(_cubes[i]);
+				_score += 100;
+				continue;
+			}
+
+			_cubes[i]->Update();
+		}
+	}
+
 }
 void Scene_15_09_15::Render()
 {
 	m_pRootFrame->Render();
 
 	D3DXMATRIXA16 matWorld, matS, matR;
+
+	DEVICE->SetTexture(0, NULL);
 
 	D3DXMatrixScaling(&matS, 0.02, 0.02, 0.02);
 	D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0f);
@@ -126,4 +199,15 @@ void Scene_15_09_15::Render()
 	{
 		p->Render();
 	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (_cubes[i] != NULL)
+		{
+			_cubes[i]->Render();
+		}
+	}
+	DEVICE->SetTexture(0, NULL);
+	
+	DXFONT_MGR->PrintText(std::to_string(_score), 10, 200, 0xff000000);
 }

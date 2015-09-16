@@ -57,30 +57,37 @@ typedef struct tagPC_VERTEX
 
 typedef struct tagPT_VERTEX
 {
-	D3DXVECTOR3 p;
-	D3DXVECTOR2	t;
+	D3DXVECTOR3 p = { 0, 0, 0 };
+	D3DXVECTOR2	t = { 0, 0 };
 	static enum { FVF = D3DFVF_XYZ | D3DFVF_TEX0 };
 
 	tagPT_VERTEX() 
 	{
-		tagPT_VERTEX(0, 0, 0, 0, 0);
+
 	}
-	tagPT_VERTEX(D3DXVECTOR3 pos)
+	tagPT_VERTEX(D3DXVECTOR3 &pos)
 	{
-		tagPT_VERTEX(pos.x, pos.y, pos.z, 0, 0);
+		p = pos;
 	}
 	tagPT_VERTEX(float x, float y, float z)
 	{
-		tagPT_VERTEX(x, y, z, 0, 0);
+		p.x = x;
+		p.y = y;
+		p.z = z;
 	}
-	tagPT_VERTEX(D3DXVECTOR3 pos, D3DXVECTOR2 tex)
+	tagPT_VERTEX(D3DXVECTOR3 &pos, D3DXVECTOR2 &tex)
 	{
-		tagPT_VERTEX(pos.x, pos.y, pos.z, tex.x, tex.y);
+		p = pos;
+		t = tex;
 	}
 	tagPT_VERTEX(float x, float y, float z, float u, float v)
 	{
-		p = D3DXVECTOR3(x, y, z);
-		t = D3DXVECTOR2(u, v);
+		p.x = x;
+		p.y = y;
+		p.z = z;
+
+		t.x = u;
+		t.y = v;
 	}
 } PT_VERTEX, FAR *LPPT_VEREX;
 

@@ -14,21 +14,25 @@ namespace NS_ROOT
 		{
 		}
 
-		HRESULT Cube::Setup()
+		HRESULT Cube::Setup(LPDIRECT3DTEXTURE9 t)
 		{
+			_texture = t;
+			t->AddRef();
+
 			//8개의 정점
-			PC_VERTEX cubes[8];
+			D3DXVECTOR3 cubes[8];
 			int face[6][4];
+			D3DXVECTOR2 tex[4] = { { 0, 1 }, { 0, 0 }, { 1, 0 }, { 1, 1 } };
 			int index[6] = { 0, 1, 2, 0, 2, 3 };
 
-			cubes[0] = PC_VERTEX(-1, -1, -1, 0xffff0000);
-			cubes[1] = PC_VERTEX(-1, 1, -1, 0xff00ff00);
-			cubes[2] = PC_VERTEX(1, 1, -1, 0xff0000ff);
-			cubes[3] = PC_VERTEX(1, -1, -1, 0xff880000);
-			cubes[4] = PC_VERTEX(-1, -1, 1, 0xff008800);
-			cubes[5] = PC_VERTEX(-1, 1, 1, 0xff000088);
-			cubes[6] = PC_VERTEX(1, 1, 1, 0xffffff00);
-			cubes[7] = PC_VERTEX(1, -1, 1, 0xffff00ff);
+			cubes[0] = D3DXVECTOR3(-1, -1, -1);
+			cubes[1] = D3DXVECTOR3(-1, 1, -1);
+			cubes[2] = D3DXVECTOR3(1, 1, -1);
+			cubes[3] = D3DXVECTOR3(1, -1, -1);
+			cubes[4] = D3DXVECTOR3(-1, -1, 1);
+			cubes[5] = D3DXVECTOR3(-1, 1, 1);
+			cubes[6] = D3DXVECTOR3(1, 1, 1);
+			cubes[7] = D3DXVECTOR3(1, -1, 1);
 
 			face[0][0] = 0;
 			face[0][1] = 1;
@@ -64,7 +68,8 @@ namespace NS_ROOT
 			{
 				for (int j = 0; j < 6; ++j)
 				{
-					_vertex[i * 6 + j] = cubes[face[i][index[j]]];
+					_vertex[i * 6 + j].p = cubes[face[i][index[j]]];
+					_vertex[i * 6 + j].t = tex[index[j]];
 				}
 			}
 
@@ -73,18 +78,25 @@ namespace NS_ROOT
 
 		void Cube::Release()
 		{
-
+			_texture->Release();
 		}
 
 		void Cube::Update()
 		{
+			D3DXMATRIXA16 rot;
 
+			D3DXMatrixRotationY(&rot, RAD((GetTickCount() / 10) % 360));
+
+			this->SetRotateLocal(rot);
 		}
 
 		void Cube::Render()
 		{
 			DEVICE->SetTransform(D3DTS_WORLD, &this->GetFinalMatrix());
-			DEVICE->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 12, _vertex, sizeof(PC_VERTEX));
+
+			DEVICE->SetTexture(0, _texture);
+			DEVICE->SetFVF(PNT_VERTEX::FVF);
+			DEVICE->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 12, _vertex, sizeof(PNT_VERTEX));
 		}
 	}
 }

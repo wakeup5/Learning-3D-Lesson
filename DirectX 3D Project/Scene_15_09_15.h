@@ -5,6 +5,7 @@
 #include "cGroup.h"
 #include "cObjLoader.h"
 #include "cObjMap.h"
+#include "Cube.h"
 
 class Scene_15_09_15 :
 	public NS_ROOT::NS_BASE::Scene
@@ -19,6 +20,14 @@ private:
 	//맵
 	std::vector<cGroup*> m_vecGroup;
 	cObjMap* _om;
+
+	//큐브즈
+	NS_ROOT::NS_OBJECTS::Cube* _cubes[10];
+
+	//텍스쳐들
+	LPDIRECT3DTEXTURE9 _tex[3];
+
+	int _score = 0;
 public:
 	Scene_15_09_15();
 	virtual ~Scene_15_09_15();

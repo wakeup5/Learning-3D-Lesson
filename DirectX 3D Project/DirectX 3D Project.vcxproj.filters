@@ -37,11 +37,11 @@
     <Filter Include="Obj, Ase Loader">
       <UniqueIdentifier>{b2ea4fcd-fa55-4b5c-9d99-7e29c6b7d3ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일\obj">
-      <UniqueIdentifier>{c853224a-ab79-4f0d-969b-70b2dccdd566}</UniqueIdentifier>
+    <Filter Include="Scene\homework">
+      <UniqueIdentifier>{ed6b247d-8d17-4d31-9cc2-7c50c3d15481}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일\ase">
-      <UniqueIdentifier>{fc8cdb7f-04b2-458f-b684-4f4a6c8e95d5}</UniqueIdentifier>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{31ea4585-f5dc-4fea-a409-e55e281b1145}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,9 +103,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Game\Common\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cObjMap.h">
       <Filter>Obj, Ase Loader</Filter>
     </ClInclude>
@@ -140,7 +137,10 @@
       <Filter>Obj, Ase Loader</Filter>
     </ClInclude>
     <ClInclude Include="Scene_15_09_15.h">
-      <Filter>Scene</Filter>
+      <Filter>Scene\homework</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +183,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Game\Common\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cObjMap.cpp">
       <Filter>Obj, Ase Loader</Filter>
     </ClCompile>
@@ -217,7 +214,10 @@
       <Filter>Obj, Ase Loader</Filter>
     </ClCompile>
     <ClCompile Include="Scene_15_09_15.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Scene\homework</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,138 +232,5 @@
     <Image Include="DirectX 3D Project.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="resource\obj\box.jpg">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\obj\Ca_Vill_StreetLight_01.tga">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\obj\Ca_Vill_StreetLight_01_N.tga">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\obj\Map__21_Normal_Bump.tga">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\obj\Map__297_Normal_Bump.tga">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\obj\NMP_Ripples2_512.dds">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\obj\seafloor.dds">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\obj\WS_Canon_01_D.tga">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\obj\WS_Canon_01_S.tga">
-      <Filter>리소스 파일\obj</Filter>
-    </Image>
-    <Image Include="resource\woman\body_woman_01_s.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\body_woman_01_s_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\face_woman_02_s.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\face_woman_02_s_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\foot_woman_01.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\foot_woman_01_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\hair_woman_01.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\hair_woman_01_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\hand_woman_01.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\hand_woman_01_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\leg_woman_01_s.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\leg_woman_01_s_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\rabbit.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\rabbit_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\shield.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\shield_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\sword_001.jpg">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-    <Image Include="resource\woman\sword_001_normal.tga">
-      <Filter>리소스 파일\ase</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resource\obj\box.mtl">
-      <Filter>리소스 파일\obj</Filter>
-    </None>
-    <None Include="resource\obj\cannon.mtl">
-      <Filter>리소스 파일\obj</Filter>
-    </None>
-    <None Include="resource\obj\cannon2.mtl">
-      <Filter>리소스 파일\obj</Filter>
-    </None>
-    <None Include="resource\obj\Map.mtl">
-      <Filter>리소스 파일\obj</Filter>
-    </None>
-    <None Include="resource\obj\map_surface.mtl">
-      <Filter>리소스 파일\obj</Filter>
-    </None>
-    <None Include="resource\obj\streetLight.mtl">
-      <Filter>리소스 파일\obj</Filter>
-    </None>
-    <None Include="resource\woman\woman_01_all.ASE">
-      <Filter>리소스 파일\ase</Filter>
-    </None>
-    <None Include="resource\woman\woman_01_all_normal.ASE">
-      <Filter>리소스 파일\ase</Filter>
-    </None>
-    <None Include="resource\woman\woman_01_all_stand.ASE">
-      <Filter>리소스 파일\ase</Filter>
-    </None>
-    <None Include="resource\woman\woman_01_all_stand_normal.ASE">
-      <Filter>리소스 파일\ase</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="resource\obj\box.obj">
-      <Filter>리소스 파일\obj</Filter>
-    </Object>
-    <Object Include="resource\obj\cannon.obj">
-      <Filter>리소스 파일\obj</Filter>
-    </Object>
-    <Object Include="resource\obj\cannon2.obj">
-      <Filter>리소스 파일\obj</Filter>
-    </Object>
-    <Object Include="resource\obj\Map.obj">
-      <Filter>리소스 파일\obj</Filter>
-    </Object>
-    <Object Include="resource\obj\map_surface.obj">
-      <Filter>리소스 파일\obj</Filter>
-    </Object>
-    <Object Include="resource\obj\streetLight.obj">
-      <Filter>리소스 파일\obj</Filter>
-    </Object>
   </ItemGroup>
 </Project>
