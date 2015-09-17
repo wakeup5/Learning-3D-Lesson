@@ -41,14 +41,11 @@ HRESULT Scene_15_09_15::Setup()
 	_look = { 0, 10, 0 };
 
 	//텍스쳐들
-	LPDIRECT3DTEXTURE9 t1, t2, t3;
-	D3DXCreateTextureFromFile(DEVICE, "./obj/Map__21_Normal_Bump.tga", &t1);
-	D3DXCreateTextureFromFile(DEVICE, "./obj/WS_Canon_01_S.tga", &t2);
-	D3DXCreateTextureFromFile(DEVICE, "./obj/box.jpg", &t3);
+	D3DXCreateTextureFromFile(DEVICE, "./obj/Map__21_Normal_Bump.tga", &_tex[0]);
+	D3DXCreateTextureFromFile(DEVICE, "./obj/WS_Canon_01_S.tga", &_tex[1]);
+	D3DXCreateTextureFromFile(DEVICE, "./obj/box.jpg", &_tex[2]);
 
-	_tex[0] = t1;
-	_tex[1] = t2;
-	_tex[2] = t3;
+	D3DXCreateTextureFromFile(DEVICE, "./resource/batman.png", &_tBat);
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -108,7 +105,10 @@ void Scene_15_09_15::Update(float timeDelta)
 
 	_camera->SetWorldPosition(_look + cd);
 	_camera->LookPosition(_look);
+	_camera->ShakeUpdate(timeDelta);
+	
 	_camera->UpdateCamToDevice(DEVICE);
+	
 
 	KeyControl();
 	CreateCube();
@@ -174,6 +174,9 @@ void Scene_15_09_15::Update(float timeDelta)
 				_char->SetAction(ac);
 				ac->Start();
 
+				_camera->ShakePos(0.5, 2.5);
+				_camera->SetShakePosFlag(SHAKE_X | SHAKE_Y);
+
 				break;
 			}
 		}
@@ -207,6 +210,7 @@ void Scene_15_09_15::Render()
 			_bullets[i]->Render();
 	}
 
+	DEVICE->SetTexture(0, _tBat);
 	_char->Render();
 
 	DEVICE->SetTexture(0, NULL);

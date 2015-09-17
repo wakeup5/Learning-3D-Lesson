@@ -1393,7 +1393,7 @@ namespace NS_ROOT
 				if (this->ShakePosFlag & SHAKE_Z)
 					localPos.z = Util::RandomFloatRange(-this->ShakePosPower, this->ShakePosPower);
 
-				this->SetLocalPosition(localPos);
+				this->SetLocalPosition(this->GetLocalPosition() + localPos);
 
 				this->ShakePosPower -= this->ShakePosRelease * timeDelta;
 

@@ -14,6 +14,8 @@ namespace NS_ROOT
 			void Release();
 			void Update();
 			void Render();
+
+			virtual void SetScale(float x, float y, float z);
 		};
 	}
 }

@@ -42,6 +42,8 @@ private:
 	//
 	NS_ROOT::NS_OBJECTS::Charactor* _char;
 	NS_ROOT::Objects::ActionMoveBezier* ac;
+
+	LPDIRECT3DTEXTURE9 _tBat;
 public:
 	Scene_15_09_15();
 	virtual ~Scene_15_09_15();

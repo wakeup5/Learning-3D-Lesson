@@ -49,6 +49,12 @@
     <Filter Include="Objects\action">
       <UniqueIdentifier>{8f368ed4-b270-416e-965a-045e31776696}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\character">
+      <UniqueIdentifier>{ab3e2825-244d-4a3b-abd0-f79bc0ef26e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\character\cubeman">
+      <UniqueIdentifier>{c57ac95a-2011-45dc-849b-5c1d89e7e366}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="숙제.txt" />
@@ -161,7 +167,10 @@
       <Filter>Objects\action</Filter>
     </ClInclude>
     <ClInclude Include="Charactor.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Objects\character</Filter>
+    </ClInclude>
+    <ClInclude Include="Cubes.h">
+      <Filter>Objects\character\cubeman</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -253,7 +262,10 @@
       <Filter>Objects\action</Filter>
     </ClCompile>
     <ClCompile Include="Charactor.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Objects\character</Filter>
+    </ClCompile>
+    <ClCompile Include="Cubes.cpp">
+      <Filter>Objects\character\cubeman</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

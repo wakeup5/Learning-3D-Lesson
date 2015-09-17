@@ -25,14 +25,14 @@ namespace NS_ROOT
 			D3DXVECTOR2 tex[4] = { { 0, 1 }, { 0, 0 }, { 1, 0 }, { 1, 1 } };
 			int index[6] = { 0, 1, 2, 0, 2, 3 };
 
-			cubes[0] = D3DXVECTOR3(-1, -1, -1);
-			cubes[1] = D3DXVECTOR3(-1, 1, -1);
-			cubes[2] = D3DXVECTOR3(1, 1, -1);
-			cubes[3] = D3DXVECTOR3(1, -1, -1);
-			cubes[4] = D3DXVECTOR3(-1, -1, 1);
-			cubes[5] = D3DXVECTOR3(-1, 1, 1);
-			cubes[6] = D3DXVECTOR3(1, 1, 1);
-			cubes[7] = D3DXVECTOR3(1, -1, 1);
+			cubes[0] = D3DXVECTOR3(-1, -2, -1);
+			cubes[1] = D3DXVECTOR3(-1, 0, -1);
+			cubes[2] = D3DXVECTOR3(1, 0, -1);
+			cubes[3] = D3DXVECTOR3(1, -2, -1);
+			cubes[4] = D3DXVECTOR3(-1, -2, 1);
+			cubes[5] = D3DXVECTOR3(-1, 0, 1);
+			cubes[6] = D3DXVECTOR3(1, 0, 1);
+			cubes[7] = D3DXVECTOR3(1, -2, 1);
 
 			face[0][0] = 0;
 			face[0][1] = 1;
@@ -95,6 +95,16 @@ namespace NS_ROOT
 		void Cube::Render()
 		{
 			Figure::Render();
+		}
+		void Cube::SetScale(float x, float y, float z)
+		{
+			D3DXMATRIXA16 mat;
+
+			D3DXMatrixScaling(&mat, x, y, z);
+			for (int i = 0; i < _size; i++)
+			{
+				D3DXVec3TransformNormal(&_vertex[i].p, &_vertex[i].p, &mat);
+			}
 		}
 	}
 }
