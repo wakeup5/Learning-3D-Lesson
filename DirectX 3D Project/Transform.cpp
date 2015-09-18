@@ -1217,22 +1217,24 @@ namespace NS_ROOT
 			static float accelate = 30.0f;						//초당 이동 증가값
 			static float nowSpeed = 3.0f;						//현재 속도
 			static float maxSpeed = 10.0f;						//최고 속도 
-
+			static POINT prev = GS.mousePos;
 
 																//최초 누를때는 마우스 위치를 가운데로 놓고 시작
-			if (KEY_MGR->IsOnceDown(VK_RBUTTON)) {
+			if (KEY_MGR->IsOnceDown(VK_LBUTTON)) {
 
 				//화면의 중심위치
 				int screenCenterX = WINSIZE_X / 2;
 				int screenCenterY = WINSIZE_Y / 2;
 
 				//다시 마우스 위치를 센터로...
-				Util::SetMousePos(screenCenterX, screenCenterY);
+				//Util::SetMousePos(screenCenterX, screenCenterY);
+
+				prev = GS.mousePos;
 			}
 
 			//우클릭을 할때만 Default Control 을 한다
-			else if (KEY_MGR->IsStayDown(VK_RBUTTON)) {
-
+			else if (KEY_MGR->IsStayDown(VK_LBUTTON)) {
+				
 				//
 				// 이동 처리
 				//
@@ -1332,8 +1334,10 @@ namespace NS_ROOT
 				// 회전 처리
 				// 
 				//화면의 중심위치
-				int screenCenterX = WINSIZE_X / 2;
-				int screenCenterY = WINSIZE_Y / 2;
+				
+
+				int screenCenterX = prev.x;
+				int screenCenterY = prev.y;
 
 				//현재 마우스 위치
 				POINT mousePos = Util::GetMousePos();
@@ -1350,11 +1354,12 @@ namespace NS_ROOT
 				nowAngleV = Util::Clamp(nowAngleV, minAngleV, maxAngleV);
 
 				//다시 마우스 위치를 센터로...
-				Util::SetMousePos(screenCenterX, screenCenterY);
+				//Util::SetMousePos(screenCenterX, screenCenterY);
 
 
 				this->SetRotateWorld(nowAngleV * ONE_RAD, nowAngleH * ONE_RAD, 0.0f);
 
+				prev = GS.mousePos;
 			}
 
 

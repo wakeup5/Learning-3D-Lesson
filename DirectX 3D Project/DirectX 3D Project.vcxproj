@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="ReadMe.txt" />
     <Text Include="숙제.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +176,8 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Scene_15_09_15.h" />
+    <ClInclude Include="Scene_15_09_18.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="DirectX 3D Project.h" />
@@ -187,6 +190,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UITextBox.h" />
     <ClInclude Include="UIWindow.h" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +218,8 @@
     <ClCompile Include="LogMgr.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Scene_15_09_15.cpp" />
+    <ClCompile Include="Scene_15_09_18.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="DirectX 3D Project.cpp" />
@@ -226,6 +233,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UITextBox.cpp" />
     <ClCompile Include="UIWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -233,16 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DirectX 3D Project.ico" />
-    <Image Include="resource\obj\box.jpg" />
-    <Image Include="resource\woman\body_woman_01_s.jpg" />
-    <Image Include="resource\woman\face_woman_02_s.jpg" />
-    <Image Include="resource\woman\foot_woman_01.jpg" />
-    <Image Include="resource\woman\hair_woman_01.jpg" />
-    <Image Include="resource\woman\hand_woman_01.jpg" />
-    <Image Include="resource\woman\leg_woman_01_s.jpg" />
-    <Image Include="resource\woman\rabbit.jpg" />
-    <Image Include="resource\woman\shield.jpg" />
-    <Image Include="resource\woman\sword_001.jpg" />
+    <Image Include="resource\batman.png" />
     <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

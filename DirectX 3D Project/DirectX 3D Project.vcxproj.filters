@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="숙제.txt" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -177,11 +178,23 @@
     <ClInclude Include="Cubes.h">
       <Filter>Objects\character\cubeman</Filter>
     </ClInclude>
-    <ClInclude Include="UIWindow.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Game\Common\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow.h">
+      <Filter>Game\Common\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_15_09_18.h">
+      <Filter>Scene\homework</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UITextBox.h">
+      <Filter>Game\Common\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Game\Common\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -279,7 +292,19 @@
       <Filter>Objects\character\cubeman</Filter>
     </ClCompile>
     <ClCompile Include="UIWindow.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Game\Common\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_15_09_18.cpp">
+      <Filter>Scene\homework</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UITextBox.cpp">
+      <Filter>Game\Common\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Game\Common\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -294,34 +319,7 @@
     <Image Include="DirectX 3D Project.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="resource\obj\box.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\body_woman_01_s.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\face_woman_02_s.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\foot_woman_01.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\hair_woman_01.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\hand_woman_01.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\leg_woman_01_s.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\rabbit.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\shield.jpg">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="resource\woman\sword_001.jpg">
+    <Image Include="resource\batman.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

@@ -17,7 +17,12 @@ namespace NS_ROOT
 
 			virtual inline LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			{
-				if (iMessage == WM_KEYDOWN && wParam == VK_ESCAPE) PostQuitMessage(0);
+				switch (iMessage)
+				{
+				case WM_KEYDOWN:
+					if (wParam == VK_ESCAPE) PostQuitMessage(0);
+					break;
+				}
 
 				return DefWindowProc(hWnd, iMessage, wParam, lParam);
 			}

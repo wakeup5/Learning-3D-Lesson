@@ -129,10 +129,32 @@ typedef struct tagPNT_VERTEX
 
 } PNT_VERTEX, FAR *LPPNT_VERTEX;
 
+typedef struct tagRHWC_VERTEX
+{
+	D3DXVECTOR4 p;
+	D3DCOLOR	c;
+	enum { FVF = D3DFVF_XYZRHW | D3DFVF_DIFFUSE };
+} RHWC_VERTEX, FAR *LPRHWC_VERTEX;
+
 //system struct
-struct tagGameSystem
+typedef struct tagGameSystem
 {
 	POINT mousePos;
 	bool isMouseClick;
+
+	bool isUIClick;
 } GameSystem;
-#define GS GameSystem
+//#define GS GameSystem
+
+//structs
+typedef struct tagWindowSize
+{
+	int width;
+	int height;
+	tagWindowSize() {}
+	tagWindowSize(int w, int h)
+	{
+		width = w;
+		height = h;
+	}
+} WindowSize;

@@ -26,8 +26,9 @@ namespace NS_ROOT
 			HRESULT Setup(LPDIRECT3DDEVICE9	device);
 			void Release() override;
 
-			void AddStyle(std::string style, std::string fontName, float fontSize);
 
+			LPD3DXFONT GetStyle(std::string style);
+			void AddStyle(std::string style, std::string fontName, float fontSize);
 
 			void PrintText(std::string str, int x, int y, DWORD color);
 			void PrintTextShadow(std::string str, int x, int y, DWORD color, DWORD shadow = 0xff000000);

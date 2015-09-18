@@ -124,15 +124,13 @@ namespace NS_ROOT
 		{
 			char szTemp[128];
 			wsprintf(szTemp, "FPS : %d", m_FramePerSec);
-			DXFONT_MGR->PrintTextOutline(szTemp, 0, 0, 0xffffff00, 0xff000000);
+			DXFONT_MGR->PrintTextOutline(szTemp, 10, 10, 0xffffff00, 0xff000000);
 
 			sprintf(szTemp, "FrameDeltaSec : %.2f", m_FrameDeltaSec);
-			DXFONT_MGR->PrintTextOutline(szTemp, 0, 20, 0xffffff00, 0xff000000);
-
+			DXFONT_MGR->PrintTextOutline(szTemp, 10, 30, 0xffffff00, 0xff000000);
 
 			sprintf(szTemp, "TotalDeltaSec : %.2f", m_TotalSec);
-			DXFONT_MGR->PrintTextOutline(szTemp, 0, 40, 0xffffff00, 0xff000000);
-
+			DXFONT_MGR->PrintTextOutline(szTemp, 10, 50, 0xffffff00, 0xff000000);
 		}
 	}
 }

@@ -53,6 +53,16 @@ namespace NS_ROOT
 		}
 
 
+		LPD3DXFONT DXFontManager::GetStyle(std::string style)
+		{
+			MAP_FONT_ITER find = m_FontStyleMap.find(style);
+
+			if (find == m_FontStyleMap.end())
+				return m_pDefultFont;
+
+			return find->second;
+		}
+
 		void DXFontManager::AddStyle(std::string style, std::string fontName, float fontSize)
 		{
 			//이미 style 이름의 키가 존재한다면 추가되지 않는다

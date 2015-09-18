@@ -44,6 +44,7 @@
 #include "TimeMgr.h"
 #include "LogMgr.h"
 #include "KeyMgr.h"
+#include "TextureManager.h"
 
 //공통 오브젝트
 #include "Transform.h"
@@ -54,6 +55,7 @@
 #include "Scene.h"
 
 extern HWND g_hWnd;
+extern GameSystem GS;
 
 //오브젝트 로더, ase 로더
 
