@@ -3,6 +3,8 @@
 
 cFrame::cFrame(void)
 	: m_pMtlTex(NULL)
+	, m_pVB(NULL)
+	, m_nNumTri(0)
 {
 	D3DXMatrixIdentity(&m_matLocalTM);
 	D3DXMatrixIdentity(&m_matWorldTM);
@@ -11,6 +13,7 @@ cFrame::cFrame(void)
 cFrame::~cFrame(void)
 {
 	SAFE_RELEASE(m_pMtlTex);
+	SAFE_RELEASE(m_pVB);
 }
 
 void cFrame::Update( int nKeyFrame, D3DXMATRIXA16* pmatParent )
@@ -37,15 +40,20 @@ void cFrame::Render()
 	if(m_pMtlTex)
 	{
 		DEVICE->SetTransform(D3DTS_WORLD, &m_matWorldTM);
-		//DEVICE->SetTexture(0, m_pMtlTex->GetTexture());
+		DEVICE->SetTexture(0, m_pMtlTex->GetTexture());
 		//DEVICE->SetTexture(0, NULL);
 		DEVICE->SetMaterial(&m_pMtlTex->GetMaterial());
 		//DEVICE->SetTransform(D3DTS_WORLD, &m_matWorld);
 		DEVICE->SetFVF(PNT_VERTEX::FVF);
+
+		DEVICE->SetStreamSource(0, m_pVB, 0, sizeof(PNT_VERTEX));
+		DEVICE->DrawPrimitive(D3DPT_TRIANGLELIST, 0, m_nNumTri);
+		/*
 		DEVICE->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 
 			m_vecVertex.size() / 3, 
 			&m_vecVertex[0], 
 			sizeof(PNT_VERTEX));
+		*/
 	}
 	
 
@@ -178,4 +186,23 @@ void cFrame::CalcLocalR( IN int nKeyFrame, OUT D3DXMATRIXA16& matR )
 	D3DXQUATERNION q;
 	D3DXQuaternionSlerp(&q, &m_vecRotTrack[nPrevIndex].q, &m_vecRotTrack[nNextIndex].q, t);
 	D3DXMatrixRotationQuaternion(&matR, &q);
+}
+
+void cFrame::BuildVB(std::vector<PNT_VERTEX> &vecVertex)
+{
+	m_nNumTri = vecVertex.size() / 3;
+
+	DEVICE->CreateVertexBuffer(vecVertex.size() * sizeof(PNT_VERTEX), 0, PNT_VERTEX::FVF, D3DPOOL_MANAGED, &m_pVB, NULL);
+
+	PNT_VERTEX* pV = NULL;
+
+	m_pVB->Lock(0, 0, (LPVOID*)&pV, 0); //LPVOID;
+
+	memset(pV, NULL, sizeof(PNT_VERTEX) * vecVertex.size());
+	for (int i = 0; i < vecVertex.size(); i++)
+	{
+		pV[i] = PNT_VERTEX(vecVertex[i]);
+	}
+
+	m_pVB->Unlock();
 }

@@ -48,6 +48,7 @@
 //공통 오브젝트
 #include "Transform.h"
 #include "Camera.h"
+#include "Object.h"
 
 //씬
 #include "Scene.h"

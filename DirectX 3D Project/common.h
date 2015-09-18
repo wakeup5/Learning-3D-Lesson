@@ -6,6 +6,7 @@
 #define NS_UTIL		Util
 #define NS_DIRECTX	DirectX
 #define NS_OBJECTS	Objects
+#define NS_UI		UI
 
 //macro
 #define SAFE_RELEASE(p) {if ((p) != NULL) (p)->Release(); (p) = NULL;}
@@ -127,3 +128,11 @@ typedef struct tagPNT_VERTEX
 	}
 
 } PNT_VERTEX, FAR *LPPNT_VERTEX;
+
+//system struct
+struct tagGameSystem
+{
+	POINT mousePos;
+	bool isMouseClick;
+} GameSystem;
+#define GS GameSystem

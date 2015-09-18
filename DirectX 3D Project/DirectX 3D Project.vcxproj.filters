@@ -55,10 +55,15 @@
     <Filter Include="Objects\character\cubeman">
       <UniqueIdentifier>{c57ac95a-2011-45dc-849b-5c1d89e7e366}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Common\UI">
+      <UniqueIdentifier>{4d4af416-3311-420a-a485-ffc4f2593a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\Object">
+      <UniqueIdentifier>{c2cc84e6-cb55-493a-9b1c-ce59abfe7718}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="숙제.txt" />
-    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -160,17 +165,23 @@
     <ClInclude Include="Pyramid.h">
       <Filter>Objects\figure</Filter>
     </ClInclude>
+    <ClInclude Include="Charactor.h">
+      <Filter>Objects\character</Filter>
+    </ClInclude>
     <ClInclude Include="Action.h">
       <Filter>Objects\action</Filter>
     </ClInclude>
     <ClInclude Include="ActionMoveBezier.h">
       <Filter>Objects\action</Filter>
     </ClInclude>
-    <ClInclude Include="Charactor.h">
-      <Filter>Objects\character</Filter>
-    </ClInclude>
     <ClInclude Include="Cubes.h">
       <Filter>Objects\character\cubeman</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Game\Common\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -255,17 +266,20 @@
     <ClCompile Include="Pyramid.cpp">
       <Filter>Objects\figure</Filter>
     </ClCompile>
+    <ClCompile Include="Charactor.cpp">
+      <Filter>Objects\character</Filter>
+    </ClCompile>
     <ClCompile Include="Action.cpp">
       <Filter>Objects\action</Filter>
     </ClCompile>
     <ClCompile Include="ActionMoveBezier.cpp">
       <Filter>Objects\action</Filter>
     </ClCompile>
-    <ClCompile Include="Charactor.cpp">
-      <Filter>Objects\character</Filter>
-    </ClCompile>
     <ClCompile Include="Cubes.cpp">
       <Filter>Objects\character\cubeman</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindow.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +292,36 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="DirectX 3D Project.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\obj\box.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\body_woman_01_s.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\face_woman_02_s.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\foot_woman_01.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\hair_woman_01.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\hand_woman_01.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\leg_woman_01_s.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\rabbit.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\shield.jpg">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="resource\woman\sword_001.jpg">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

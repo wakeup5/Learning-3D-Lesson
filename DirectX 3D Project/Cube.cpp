@@ -64,6 +64,8 @@ namespace NS_ROOT
 			face[5][2] = 0;
 			face[5][3] = 4;
 
+			PNT_VERTEX temp;
+
 			for (int i = 0; i < 6; ++i)
 			{
 				D3DXVECTOR3 normal;
@@ -73,11 +75,15 @@ namespace NS_ROOT
 
 				for (int j = 0; j < 6; ++j)
 				{
-					_vertex[i * 6 + j].p = cubes[face[i][index[j]]];
-					_vertex[i * 6 + j].t = tex[index[j]];
-					_vertex[i * 6 + j].n = normal;
+					temp = PNT_VERTEX(cubes[face[i][index[j]]], normal, tex[index[j]]);
+					//_vertex[i * 6 + j].p = 
+					//_vertex[i * 6 + j].t = tex[index[j]];
+					//_vertex[i * 6 + j].n = normal;
+					_vertex.push_back(temp);
 				}
 			}
+
+			SetBuffer();
 
 			return S_OK;
 		}

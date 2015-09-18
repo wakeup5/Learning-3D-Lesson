@@ -149,12 +149,12 @@ void Scene_15_09_15::Update(float timeDelta)
 			float distance = D3DXVec3Length(&(_bullets[i]->GetWorldPosition() - _char->GetWorldPosition()));
 			if (distance < 2.4)
 			{
-				SAFE_RELEASE(_char);
+				//SAFE_RELEASE(_char);
 				_score += 100;
 
 				_bullets[i]->_b = true;
 
-				_char = new Objects::Charactor;
+				//_char = new Objects::Charactor;
 
 
 				ac->ClearPoint();
@@ -169,9 +169,9 @@ void Scene_15_09_15::Update(float timeDelta)
 					ac->AddPoint(pos);
 				}
 
-				ac->SetDeligate(_char);
+				//ac->SetDeligate(_char);
 
-				_char->SetAction(ac);
+				//_char->SetAction(ac);
 				ac->Start();
 
 				_camera->ShakePos(0.5, 2.5);
@@ -289,12 +289,13 @@ void Scene_15_09_15::CreateCube()
 		_cubes[i]->SetWorldPosition(pos);
 
 		_cubes[i]->SetScale(0.25, 0.25, 0.25);
+		_cubes[i]->SetBuffer();
 	}
 }
 
 void Scene_15_09_15::CreateBullet()
 {
-	if (KEY_MGR->IsStayDown(VK_SPACE))
+	if (KEY_MGR->IsOnceDown(VK_SPACE))
 	{
 		for (int i = 0; i < 10; i++)
 		{

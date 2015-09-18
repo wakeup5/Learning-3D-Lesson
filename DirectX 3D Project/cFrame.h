@@ -12,6 +12,8 @@ private:
 	SYNTHESIZE_PASS_BY_REF(std::vector<ST_ROT_SAMPLE>, m_vecRotTrack, RotTrack);
 	SYNTHESIZE_ADD_REF(cMtlTex*, m_pMtlTex, MtlTex);
 	std::vector<cFrame*> m_vecChild;
+	LPDIRECT3DVERTEXBUFFER9 m_pVB;
+	int m_nNumTri;
 
 public:
 	cFrame(void);
@@ -23,5 +25,7 @@ public:
 	void CalcOriginLocalTM(D3DXMATRIXA16* pmatParent);
 	void CalcLocalT(IN int nKeyFrame, OUT D3DXMATRIXA16& matT);
 	void CalcLocalR(IN int nKeyFrame, OUT D3DXMATRIXA16& matR);
+
+	void BuildVB(std::vector<PNT_VERTEX> &vecVertex);
 };
 

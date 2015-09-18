@@ -5,30 +5,6 @@ namespace NS_ROOT
 {
 	namespace NS_OBJECTS
 	{
-		int GetTotalSum(int num)
-		{
-			if (num == 0) 
-				return 0;
-			else if (num == 1)
-				return 1;
-			else
-				return GetTotalSum(num - 1) * num;
-		}
-
-		D3DXVECTOR3 GetPosition22222(std::vector<D3DXVECTOR3> &p, float t)
-		{
-			if (p.size() == 1) return p[0];
-
-			std::vector<D3DXVECTOR3> temp;
-
-			for (int i = 0; i < p.size() - 1; i++)
-			{
-				temp.push_back((1.0f - t) * p[i] + t * p[i + 1]);
-			}
-
-			return GetPosition22222(temp, t);
-		}
-
 		ActionMoveBezier::ActionMoveBezier()
 		{
 		}
@@ -46,6 +22,37 @@ namespace NS_ROOT
 			if (_object)
 			{
 				_object->SetWorldPosition(_points[0]);
+			}
+		}
+
+		namespace Bezier
+		{
+			D3DXVECTOR3 GetBezierVector3(std::vector<D3DXVECTOR3> &p, float t)
+
+			{
+				if (p.size() == 1) return p[0];
+
+				std::vector<D3DXVECTOR3> temp;
+
+				for (int i = 0; i < p.size() - 1; i++)
+				{
+					//베지어 포인트들이 10개 이상이면 10개만 짤라 계산한다.
+					if (i > 9) break;
+
+					temp.push_back((1.0f - t) * p[i] + t * p[i + 1]);
+				}
+
+				return GetBezierVector3(temp, t);
+			}
+
+			int GetMaterial(int num)
+			{
+				if (num == 0)
+					return 0;
+				else if (num == 1)
+					return 1;
+				else
+					return GetMaterial(num - 1) * num;
 			}
 		}
 
@@ -88,11 +95,10 @@ namespace NS_ROOT
 					p += temp;
 				}
 				*/
-				p = GetPosition22222(_points, t);
+
+				p = Bezier::GetBezierVector3(_points, t);
 				
 				//p = (1.0f - t) * _points[0] + t * _points[1];
-
-				LOG_MGR->AddLog("%f, %f, %f", p.x, p.y, p.z);
 
 				_object->SetWorldPosition(p);
 				D3DXVECTOR3 vDir = p - _prevPosition;

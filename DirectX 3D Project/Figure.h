@@ -9,8 +9,11 @@ namespace NS_ROOT
 		{
 		protected:
 			LPDIRECT3DTEXTURE9 _texture;
-			PNT_VERTEX* _vertex;
+			std::vector<PNT_VERTEX> _vertex;
 			int _size;
+
+			//vertex buffer
+			LPDIRECT3DVERTEXBUFFER9 _vertexBuffer;
 
 			void initFigure(int size);
 		public:
@@ -21,6 +24,8 @@ namespace NS_ROOT
 			virtual void Release();
 			virtual void Update();
 			virtual void Render();
+
+			void SetBuffer();
 		};
 
 		
@@ -32,6 +37,7 @@ namespace NS_ROOT
 			int _size;
 
 			void initFigure(int size);
+			//void SetBuffer();
 		public:
 			FigureC();
 			virtual ~FigureC();

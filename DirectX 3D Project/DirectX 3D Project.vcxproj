@@ -149,11 +149,14 @@
     <Text Include="숙제.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionMoveBezier.h" />
     <ClInclude Include="Asciitok.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="cAseLoader.h" />
     <ClInclude Include="cFrame.h" />
     <ClInclude Include="cGroup.h" />
+    <ClInclude Include="Charactor.h" />
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cObject.h" />
     <ClInclude Include="cObjectManager.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="cObjMap.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Cubes.h" />
     <ClInclude Include="DXFontManager.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="GizmoManager.h" />
@@ -168,6 +172,7 @@
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="LogMgr.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Scene_15_09_15.h" />
     <ClInclude Include="TimeMgr.h" />
@@ -182,12 +187,16 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UIWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionMoveBezier.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="cAseLoader.cpp" />
     <ClCompile Include="cFrame.cpp" />
     <ClCompile Include="cGroup.cpp" />
+    <ClCompile Include="Charactor.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cObject.cpp" />
     <ClCompile Include="cObjectManager.cpp" />
@@ -195,6 +204,7 @@
     <ClCompile Include="cObjMap.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Cubes.cpp" />
     <ClCompile Include="DXFontManager.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="GizmoManager.cpp" />
@@ -216,6 +226,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UIWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX 3D Project.rc" />

@@ -71,6 +71,7 @@ namespace NS_ROOT
 
 			SetScale(0.4f, 0.6f, 0.2f);
 			SetLocalPosition(0, 0, 0);
+			SetBuffer();
 		}
 		void Body::Update()
 		{
@@ -146,6 +147,7 @@ namespace NS_ROOT
 
 			SetScale(0.4f, 0.4f, 0.4f);
 			SetLocalPosition(0, 0.8f, 0);
+			SetBuffer();
 		}
 		void Head::Update()
 		{
@@ -222,6 +224,7 @@ namespace NS_ROOT
 
 			SetScale(0.2f, 0.6f, 0.2f);
 			SetLocalPosition(-0.6f, 0, 0);
+			SetBuffer();
 		}
 		void ArmL::Update()
 		{
@@ -298,6 +301,7 @@ namespace NS_ROOT
 
 			SetScale(0.2f, 0.6f, 0.2f);
 			SetLocalPosition(0.6f, 0, 0);
+			SetBuffer();
 		}
 		void ArmR::Update()
 		{
@@ -374,6 +378,7 @@ namespace NS_ROOT
 
 			SetScale(0.2f, 0.6f, 0.2f);
 			MovePositionLocal(-0.2, -1.2, 0);
+			SetBuffer();
 		}
 		void LegL::Update()
 		{
@@ -450,6 +455,7 @@ namespace NS_ROOT
 
 			SetScale(0.2f, 0.6f, 0.2f);
 			MovePositionLocal(0.2, -1.2, 0);
+			SetBuffer();
 		}
 		void LegR::Update()
 		{
