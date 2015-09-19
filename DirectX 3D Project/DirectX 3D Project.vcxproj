@@ -154,6 +154,7 @@
     <ClInclude Include="ActionMoveBezier.h" />
     <ClInclude Include="Asciitok.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cannon.h" />
     <ClInclude Include="cAseLoader.h" />
     <ClInclude Include="cFrame.h" />
     <ClInclude Include="cGroup.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Scene_15_09_15.h" />
     <ClInclude Include="Scene_15_09_18.h" />
+    <ClInclude Include="Scene_15_09_18_2.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Device.h" />
@@ -198,6 +200,7 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionMoveBezier.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="cAseLoader.cpp" />
     <ClCompile Include="cFrame.cpp" />
     <ClCompile Include="cGroup.cpp" />
@@ -219,6 +222,7 @@
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Scene_15_09_15.cpp" />
     <ClCompile Include="Scene_15_09_18.cpp" />
+    <ClCompile Include="Scene_15_09_18_2.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="Device.cpp" />

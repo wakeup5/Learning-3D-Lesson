@@ -61,6 +61,9 @@
     <Filter Include="Game\Common\Object">
       <UniqueIdentifier>{c2cc84e6-cb55-493a-9b1c-ce59abfe7718}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\cannon">
+      <UniqueIdentifier>{e0a8adf1-ca0f-4ab0-b7a9-4b2bf9ccdb6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="숙제.txt" />
@@ -196,6 +199,12 @@
     <ClInclude Include="UIButton.h">
       <Filter>Game\Common\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Cannon.h">
+      <Filter>Objects\cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_15_09_18_2.h">
+      <Filter>Scene\homework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -305,6 +314,12 @@
     </ClCompile>
     <ClCompile Include="UIButton.cpp">
       <Filter>Game\Common\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Cannon.cpp">
+      <Filter>Objects\cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_15_09_18_2.cpp">
+      <Filter>Scene\homework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

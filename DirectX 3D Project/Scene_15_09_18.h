@@ -57,7 +57,7 @@ protected:
 		}
 		else if (caller->GetTagNum() == 4)
 		{
-			root->isHidden(true);
+			root->SetHiddenState(true);
 		}
 
 		return RETURN_DEFAULT;

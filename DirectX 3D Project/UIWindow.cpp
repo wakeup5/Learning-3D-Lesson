@@ -49,7 +49,7 @@ namespace NS_ROOT
 			for (int i = 0; i < _child.size(); ++i)
 			{
 				_child[i]->Update();
-				if (_child[i]->isMouseOver())
+				if (_child[i]->IsThisMouseOver())
 				{
 					//LOG_MGR->AddLog("자식 들어왔니?");
 					_isMouseClick = false;
@@ -197,14 +197,20 @@ namespace NS_ROOT
 			child->_root = this->_root;
 		}
 
-		void UIWindow::isHidden(bool is)
+		void UIWindow::SetHiddenState(bool is)
 		{
 			for (int i = 0; i < _child.size(); ++i)
 			{
-				_child[i]->isHidden(is);
+				_child[i]->SetHiddenState(is);
 			}
 
 			_isHidden = is;
+
+			if (_isHidden)
+			{
+				_isMouseOver = false;
+				_isMouseClick = false;
+			}
 		}
 
 		void UIWindow::SetPosition(float x, float y)
@@ -247,11 +253,11 @@ namespace NS_ROOT
 			return pos;
 		}
 
-		void UIWindow::IsDrawBounding(bool is)
+		void UIWindow::SetDrawBoundingState(bool is)
 		{
 			for (int i = 0; i < _child.size(); ++i)
 			{
-				_child[i]->IsDrawBounding(is);
+				_child[i]->SetDrawBoundingState(is);
 			}
 
 			_isDrawBounding = is;
@@ -284,7 +290,10 @@ namespace NS_ROOT
 
 		UIWindow* UIWindow::GetWindowByTag(UINT num)
 		{
+			if (GetTagNum() == num) return this;
+			
 			UIWindow* result = NULL;
+
 			for (int i = 0; i < _child.size(); ++i)
 			{
 				if (_child[i]->GetTagNum() == num) return _child[i];
@@ -295,6 +304,25 @@ namespace NS_ROOT
 			}
 
 			return result;
+		}
+
+		bool UIWindow::IsMouseOver()
+		{
+			for (int i = 0; i < _child.size(); ++i)
+			{
+				if (_child[i]->IsThisMouseOver())
+					return true;
+				else if (_child[i]->IsMouseOver())
+					return true;
+
+			}
+
+			return _isMouseOver;
+		}
+
+		void UIWindow::Toggle()
+		{
+			SetHiddenState(!_isHidden);
 		}
 
 		void UIWindow::UpdateTextureSizeMatrix()

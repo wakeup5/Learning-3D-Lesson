@@ -47,7 +47,10 @@ namespace NS_ROOT
 			void AttachTo(UIWindow* parents);
 			void AddChild(UIWindow* child);
 
-			void isHidden(bool is);// { _isHidden = is; }
+			void SetHiddenState(bool is);
+			bool IsHidden() { return _isHidden; }
+			void SetDrawBoundingState(bool is);
+			bool IsDrawBounding() { return _isDrawBounding; }
 
 			void SetBackground(LPDIRECT3DTEXTURE9 tex, D3DXIMAGE_INFO info);
 			void SetBackground(char* path);
@@ -58,16 +61,20 @@ namespace NS_ROOT
 
 			POINT GetFinalPosition();
 
-			void IsDrawBounding(bool is);
-
 			void SetTagNum(UINT num) { _tagNum = num; }
 			UINT GetTagNum() { return _tagNum; }
 
 			UIWindow* GetWindowByTag(UINT num);
+			
+			bool IsMouseOver();
+
+			void Toggle();
 		protected:
 			void UpdateTextureSizeMatrix();
 
-			bool isMouseOver() { return _isMouseOver; }
+			bool IsThisMouseOver() { return _isMouseOver; }
+
+			
 		//private:
 			//위치와 크기
 			D3DXVECTOR3 _position;
@@ -122,7 +129,7 @@ namespace NS_ROOT
 			{
 				//LOG_MGR->AddLog("클릭 다운!");
 				_clickDownPt = GS.mousePos;
-				_clickDownWindowPt = root->GetPosition();
+				_clickDownWindowPt = caller->GetPosition();
 				//_clickUpPt = { 0, 0 };
 				return RETURN_DEFAULT;
 			}
@@ -130,7 +137,7 @@ namespace NS_ROOT
 			{
 				//LOG_MGR->AddLog("클릭 업!");
 				_clickUpPt = GS.mousePos;
-				_clickUpWindowPt = root->GetPosition();
+				_clickUpWindowPt = caller->GetPosition();
 				//_clickDownPt = { 0, 0 };
 				return RETURN_DEFAULT;
 			}
@@ -146,7 +153,7 @@ namespace NS_ROOT
 			}
 			inline virtual UINT OnDrag(UIWindow* caller, UIWindow* root) override
 			{
-				if (caller != root) return RETURN_DEFAULT;
+				//if (caller != root) return RETURN_DEFAULT;
 				//if (caller->_root != caller) return RETURN_DEFAULT;
 
 				POINT pt;
@@ -156,7 +163,7 @@ namespace NS_ROOT
 				pt.x += _clickDownWindowPt.x;
 				pt.y += _clickDownWindowPt.y;
 
-				root->SetPosition(pt.x, pt.y);
+				caller->SetPosition(pt.x, pt.y);
 
 				_prevClickPt = GS.mousePos;
 

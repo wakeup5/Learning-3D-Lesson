@@ -96,7 +96,7 @@ void Scene_15_09_18::Update(float timeDelta)
 
 	_cam->UpdateCamToDevice(DEVICE);
 
-	if (!GS.isUIClick && GS.isMouseClick)
+	if (!_ui->IsMouseOver() && GS.isMouseClick)
 	{
 		_cam->DefaultControl(timeDelta);
 	}
@@ -104,7 +104,7 @@ void Scene_15_09_18::Update(float timeDelta)
 	if (KEY_MGR->IsOnceDown('P'))
 	{
 		//static bool is = true;
-		_ui->isHidden(false);
+		_ui->Toggle();
 	}
 }
 void Scene_15_09_18::Render()

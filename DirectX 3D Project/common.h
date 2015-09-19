@@ -129,6 +129,50 @@ typedef struct tagPNT_VERTEX
 
 } PNT_VERTEX, FAR *LPPNT_VERTEX;
 
+typedef struct tagPNC_VERTEX
+{
+	D3DXVECTOR3 p = { 0, 0, 0 };
+	D3DXVECTOR3	n = { 0, 0, 0 };
+	DWORD c = 0;
+	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE };
+
+	tagPNC_VERTEX()
+	{
+
+	}
+	tagPNC_VERTEX(float x, float y, float z)
+	{
+		p = D3DXVECTOR3(x, y, z);
+	}
+	tagPNC_VERTEX(D3DXVECTOR3 pos)
+	{
+		p = pos;
+	}
+	tagPNC_VERTEX(float x, float y, float z, float nx, float ny, float nz)
+	{
+		p = D3DXVECTOR3(x, y, z);
+		n = D3DXVECTOR3(nx, ny, nz);
+	}
+	tagPNC_VERTEX(D3DXVECTOR3 pos, D3DXVECTOR3 nor)
+	{
+		p = pos;
+		n = nor;
+	}
+	tagPNC_VERTEX(float x, float y, float z, float nx, float ny, float nz, D3DXCOLOR color)
+	{
+		p = D3DXVECTOR3(x, y, z);
+		n = D3DXVECTOR3(nx, ny, nz);
+		c = color;
+	}
+	tagPNC_VERTEX(D3DXVECTOR3 pos, D3DXVECTOR3 nor, D3DXCOLOR color)
+	{
+		p = pos;
+		n = nor;
+		c = color;
+	}
+
+} PNC_VERTEX, FAR *LPPNC_VERTEX;
+
 typedef struct tagRHWC_VERTEX
 {
 	D3DXVECTOR4 p;
