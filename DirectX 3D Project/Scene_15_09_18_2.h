@@ -17,7 +17,7 @@ class Scene_15_09_18_2 : public Scene
 private:
 	Camera* _cam;
 
-	Cannon* _c[5];
+	Cannon* _c[10];
 	Cube* _cube;
 public:
 	Scene_15_09_18_2();
