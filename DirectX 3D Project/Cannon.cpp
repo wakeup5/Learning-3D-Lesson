@@ -136,7 +136,6 @@ namespace NS_ROOT
 
 
 				_ib->Unlock();
-
 			}
 			void CannonCube::Release()
 			{
@@ -145,7 +144,7 @@ namespace NS_ROOT
 			}
 			void CannonCube::Update()
 			{
-				_matPos, _matRot, _matScale, _matLocal;
+				//_matPos, _matRot, _matScale, _matLocal;
 
 				D3DXMATRIXA16 rx, ry, rz;
 
@@ -190,15 +189,34 @@ namespace NS_ROOT
 				_direction = D3DXVECTOR3(0, 0, 1);
 				D3DXVec3TransformCoord(&_direction, &_direction, &_matRot);
 			}
-			void CannonCube::Render()
+			void CannonCube::Render(LPD3DXEFFECT pEffect)
 			{
 				DEVICE->SetTransform(D3DTS_WORLD, &_matLocal);
 
 				DEVICE->SetFVF(PNC_VERTEX::FVF);
 				DEVICE->SetStreamSource(0, _vb, 0, sizeof(PNC_VERTEX));
 				DEVICE->SetIndices(_ib);
-				DEVICE->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 12, 0, 12);
-				DEVICE->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2);
+
+				if (!pEffect)
+				{
+					DEVICE->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 12, 0, 12);;
+					return;
+				}
+
+				pEffect->SetMatrix("matWorld", &GetLocalMatrix());
+
+				UINT iPassNum = 0;
+
+				pEffect->Begin(&iPassNum, 0);
+
+				for (UINT i = 0; i < iPassNum; i++)
+				{
+					pEffect->BeginPass(i);		//i 번째 Pass 시작
+					DEVICE->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 12, 0, 12);
+					pEffect->EndPass();			//Pass 끝
+				}
+
+				pEffect->End();
 			}
 
 			void CannonCube::SetPosition(float x, float y, float z)
@@ -250,6 +268,8 @@ namespace NS_ROOT
 				_small->Setup({ 1, 1, 3 }, { 0, 0, 0 }, { 0, 0, 1.5 });
 				_small->SetPosition(0, 1, 0);
 				_small->SetParent(this);
+
+				//pEffect = NULL;
 			}
 			void Cannon::Release()
 			{
@@ -262,10 +282,10 @@ namespace NS_ROOT
 				_big->Update();
 				_small->Update();
 			}
-			void Cannon::Render()
+			void Cannon::Render(LPD3DXEFFECT pEffect)
 			{
-				_big->Render();
-				_small->Render();
+				_big->Render(pEffect);
+				_small->Render(pEffect);
 			}
 
 			void Cannon::Look(D3DXVECTOR3 &look)

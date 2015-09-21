@@ -4,6 +4,7 @@
 #include "Scene_15_09_15.h"
 #include "Scene_15_09_18.h"
 #include "Scene_15_09_18_2.h"
+#include "Scene_15_09_21.h"
 
 namespace NS_ROOT
 {
@@ -27,7 +28,7 @@ namespace NS_ROOT
 			DXFONT_MGR->Setup(DEVICE);
 			GIZMO_MGR->Setup(DEVICE);
 
-			_scene = new Scene_15_09_18_2;
+			_scene = new Scene_15_09_21;
 			_scene->Setup();
 
 			return S_OK;

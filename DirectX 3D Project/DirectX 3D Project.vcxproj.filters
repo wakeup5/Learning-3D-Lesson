@@ -205,6 +205,9 @@
     <ClInclude Include="Scene_15_09_18_2.h">
       <Filter>Scene\homework</Filter>
     </ClInclude>
+    <ClInclude Include="Scene_15_09_21.h">
+      <Filter>Scene\homework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -319,6 +322,9 @@
       <Filter>Objects\cannon</Filter>
     </ClCompile>
     <ClCompile Include="Scene_15_09_18_2.cpp">
+      <Filter>Scene\homework</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_15_09_21.cpp">
       <Filter>Scene\homework</Filter>
     </ClCompile>
   </ItemGroup>

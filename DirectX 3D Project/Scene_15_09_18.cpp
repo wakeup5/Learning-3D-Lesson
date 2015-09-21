@@ -17,15 +17,9 @@ HRESULT Scene_15_09_18::Setup()
 	_cam = new Camera;
 	_cam->SetWorldPosition({ 0, 5, 10 });
 
-	//LPDIRECT3DTEXTURE9 _tex;
-	//D3DXIMAGE_INFO _info;
-
-	//_tex = TEXTURE_MGR->GetTexture("./resource/ui/aa.png", &_info);
-	//D3DXCreateTextureFromFile(DEVICE, "./resource/ui/aa.png", &_tex);
-
 	_ui = new UIWindow;
 	_ui->Setup();
-	_ui->SetBackground("./resource/ui/aa.png");
+	_ui->SetBackground("./resource/batman.png");
 	_ui->SetSize(300, 500);
 	_ui->SetPosition(10, 10);
 
@@ -45,7 +39,7 @@ HRESULT Scene_15_09_18::Setup()
 	_uiOk->SetSize(200, 50);
 	_uiOk->SetPosition(50, 300);
 	_uiOk->AttachTo(_ui);
-	_uiOk->SetButtonTexture("./resource/ui/btn-med-up.png", "./resource/ui/btn-med-over.png", "./resource/ui/btn-med-down.png");
+	_uiOk->SetButtonTexture("./resource/batman.png", "./resource/batman.png", "./resource/batman.png");//"./resource/ui/btn-med-up.png", "./resource/ui/btn-med-over.png", "./resource/ui/btn-med-down.png");
 	_uiOk->SetFontFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
 	_uiOk->SetText("확인");
 	_uiOk->SetTagNum(2);
@@ -56,7 +50,7 @@ HRESULT Scene_15_09_18::Setup()
 	_uiNo->SetSize(200, 50);
 	_uiNo->SetPosition(50, 360);
 	_uiNo->AttachTo(_ui);
-	_uiNo->SetButtonTexture("./resource/ui/btn-med-up.png", "./resource/ui/btn-med-over.png", "./resource/ui/btn-med-down.png");
+	_uiNo->SetButtonTexture("./resource/batman.png", "./resource/batman.png", "./resource/batman.png");//"./resource/ui/btn-med-up.png", "./resource/ui/btn-med-over.png", "./resource/ui/btn-med-down.png");
 	_uiNo->SetFontFormat(DT_CENTER | DT_VCENTER | DT_WORDBREAK);
 	_uiNo->SetText("취소");
 	_uiNo->SetTagNum(3);

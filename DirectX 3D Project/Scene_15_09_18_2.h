@@ -19,6 +19,10 @@ private:
 
 	Cannon* _c[10];
 	Cube* _cube;
+
+	std::vector<CannonBullet> _b;
+
+	LPD3DXEFFECT pEffect;
 public:
 	Scene_15_09_18_2();
 	virtual ~Scene_15_09_18_2();

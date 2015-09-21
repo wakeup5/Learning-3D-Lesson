@@ -322,7 +322,7 @@ namespace NS_ROOT
 
 		void UIWindow::Toggle()
 		{
-			SetHiddenState(!_isHidden);
+			SetHiddenState(!IsHidden());//IsHidden()
 		}
 
 		void UIWindow::UpdateTextureSizeMatrix()
