@@ -101,7 +101,7 @@ namespace NS_ROOT
 				//p = (1.0f - t) * _points[0] + t * _points[1];
 
 				_object->SetWorldPosition(p);
-				D3DXVECTOR3 vDir = p - _prevPosition;
+				D3DXVECTOR3 vDir = _prevPosition - p;
 				D3DXVec3Normalize(&vDir, &vDir);
 				_object->LookDirection(vDir);
 				_prevPosition = p;

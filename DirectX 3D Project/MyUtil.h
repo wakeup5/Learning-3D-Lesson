@@ -53,5 +53,11 @@ namespace NS_ROOT
 			);
 
 		float GetDistance(const D3DXVECTOR3 &p1, const D3DXVECTOR3 &p2);
+
+		bool IntersectSphere(Ray r, Sphere &s);
+		Ray GetRayByMousePos(float x, float y);
+
+		bool IntersectPolygon(Ray r, D3DXVECTOR3 *arrVector, D3DXVECTOR3 *colisPos = NULL//선과 면의 충돌한 위치를 받을 변수
+			);
 	}
 }

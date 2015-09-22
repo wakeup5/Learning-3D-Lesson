@@ -190,15 +190,44 @@ typedef struct tagGameSystem
 } GameSystem;
 //#define GS GameSystem
 
-//structs
-typedef struct tagWindowSize
+//struct
+namespace NS_ROOT
 {
-	int width;
-	int height;
-	tagWindowSize() {}
-	tagWindowSize(int w, int h)
+	typedef struct tagWindowSize
 	{
-		width = w;
-		height = h;
-	}
-} WindowSize;
+		int width;
+		int height;
+		tagWindowSize() {}
+		tagWindowSize(int w, int h)
+		{
+			width = w;
+			height = h;
+		}
+	} WindowSize;
+
+	typedef struct tagRay
+	{
+		D3DXVECTOR3 origin;
+		D3DXVECTOR3 direction;
+
+		tagRay(){}
+	} Ray;
+
+	typedef struct tagSphere
+	{
+		union
+		{
+			D3DXVECTOR3 position;
+			struct
+			{
+				float x;
+				float y;
+				float z;
+			};
+		};
+
+		float radius;
+
+		tagSphere() {}
+	} Sphere;
+}

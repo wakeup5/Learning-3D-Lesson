@@ -54,6 +54,7 @@ void cFrame::Render()
 			&m_vecVertex[0], 
 			sizeof(PNT_VERTEX));
 		*/
+		//DEVICE->SetTexture(0, NULL);
 	}
 	
 

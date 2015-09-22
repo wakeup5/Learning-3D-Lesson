@@ -189,5 +189,73 @@ namespace NS_ROOT
 			return sqrt((temp.x * temp.x) + (temp.y * temp.y) + (temp.z * temp.z));
 		}
 
+		bool IntersectSphere(Ray r, Sphere &s)
+		{
+			D3DXMATRIXA16 matPos, matPosInv;
+			D3DXMatrixTranslation(&matPos, s.x, s.y, s.z);
+
+			D3DXMatrixInverse(&matPosInv, NULL, &matPos);
+
+			D3DXVec3TransformCoord(&r.origin, &r.origin, &matPosInv);
+			D3DXVec3TransformCoord(&r.origin, &r.origin, &matPosInv);
+
+			float b = D3DXVec3Dot(&r.origin, &r.direction);
+			float a = D3DXVec3Dot(&r.direction, &r.direction);
+			float c = (r.origin.x * r.origin.x + r.origin.y * r.origin.y + r.origin.z * r.origin.z) - (s.radius * s.radius);
+
+			if (b * b - a * c >= 0) return true;
+
+			return false;
+		}
+
+		Ray GetRayByMousePos(float x, float y)
+		{
+			Ray result;
+			float px, py;
+
+			D3DVIEWPORT9 vp;
+			D3DXMATRIXA16 proj, view, viewInv;
+			//뷰포트돠 투영 정보를 이용해서 카메라 좌표를 얻는다.
+			DEVICE->GetViewport(&vp);
+			DEVICE->GetTransform(D3DTS_PROJECTION, &proj);
+
+			px = (((2.0f * x) / vp.Width) - 1.0f) / proj._11;
+			py = (((-2.0f * y) / vp.Height) + 1.0f) / proj._22;
+
+			result.origin = D3DXVECTOR3(0, 0, 0);
+			result.direction = D3DXVECTOR3(px, py, 1);
+			//카메라 좌표를 월드 좌표계로 이동
+
+			DEVICE->GetTransform(D3DTS_VIEW, &view);
+			D3DXMatrixInverse(&viewInv, NULL, &view);
+
+			D3DXVec3TransformCoord(&result.origin, &result.origin, &viewInv);
+			D3DXVec3TransformNormal(&result.direction, &result.direction, &viewInv);
+			D3DXVec3Normalize(&result.direction, &result.direction);
+
+			return result;
+		}
+		bool IntersectPolygon(Ray r, D3DXVECTOR3 * arrVector, D3DXVECTOR3 *colisPos)
+		{
+			bool result;
+			D3DXVECTOR3 temp;
+			float u, v;
+
+			result = D3DXIntersectTri(
+				&arrVector[0],
+				&arrVector[1],
+				&arrVector[2],
+				&r.origin,
+				&r.direction,
+				&u, &v, NULL);
+			
+			//충돌한 지점 구하기
+
+			temp = arrVector[0] + u * (arrVector[1] - arrVector[0]) + v * (arrVector[2] - arrVector[0]);
+
+			if (colisPos) *colisPos = temp;
+
+			return result;
+		}
 	}
 }
